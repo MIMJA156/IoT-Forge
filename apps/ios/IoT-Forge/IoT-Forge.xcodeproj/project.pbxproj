@@ -1,0 +1,431 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1F48DF382B8150A400D163F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF372B8150A400D163F4 /* AppDelegate.swift */; };
+		1F48DF3A2B8150A400D163F4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF392B8150A400D163F4 /* SceneDelegate.swift */; };
+		1F48DF3C2B8150A400D163F4 /* UserDevicesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF3B2B8150A400D163F4 /* UserDevicesController.swift */; };
+		1F48DF3F2B8150A400D163F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F48DF3D2B8150A400D163F4 /* Main.storyboard */; };
+		1F48DF422B8150A400D163F4 /* IoT_Forge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF402B8150A400D163F4 /* IoT_Forge.xcdatamodeld */; };
+		1F48DF442B8150A600D163F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F48DF432B8150A600D163F4 /* Assets.xcassets */; };
+		1F48DF472B8150A600D163F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F48DF452B8150A600D163F4 /* LaunchScreen.storyboard */; };
+		1F48DF502B8154F900D163F4 /* DataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF4F2B8154F900D163F4 /* DataHelper.swift */; };
+		1F48DF522B81551800D163F4 /* BLEHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF512B81551800D163F4 /* BLEHelper.swift */; };
+		1F48DF542B815FCB00D163F4 /* ExploreDevicesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF532B815FCB00D163F4 /* ExploreDevicesController.swift */; };
+		1F48DF562B81677600D163F4 /* Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF552B81677600D163F4 /* Structures.swift */; };
+		1F48DF5A2B81727200D163F4 /* DeviceProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF592B81727200D163F4 /* DeviceProfileCell.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1F48DF342B8150A400D163F4 /* IoT-Forge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IoT-Forge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F48DF372B8150A400D163F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1F48DF392B8150A400D163F4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		1F48DF3B2B8150A400D163F4 /* UserDevicesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDevicesController.swift; sourceTree = "<group>"; };
+		1F48DF3E2B8150A400D163F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1F48DF412B8150A400D163F4 /* IoT_Forge.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IoT_Forge.xcdatamodel; sourceTree = "<group>"; };
+		1F48DF432B8150A600D163F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1F48DF462B8150A600D163F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1F48DF482B8150A600D163F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1F48DF4F2B8154F900D163F4 /* DataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHelper.swift; sourceTree = "<group>"; };
+		1F48DF512B81551800D163F4 /* BLEHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEHelper.swift; sourceTree = "<group>"; };
+		1F48DF532B815FCB00D163F4 /* ExploreDevicesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDevicesController.swift; sourceTree = "<group>"; };
+		1F48DF552B81677600D163F4 /* Structures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structures.swift; sourceTree = "<group>"; };
+		1F48DF592B81727200D163F4 /* DeviceProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceProfileCell.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1F48DF312B8150A400D163F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1F48DF2B2B8150A400D163F4 = {
+			isa = PBXGroup;
+			children = (
+				1F48DF362B8150A400D163F4 /* IoT-Forge */,
+				1F48DF352B8150A400D163F4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1F48DF352B8150A400D163F4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1F48DF342B8150A400D163F4 /* IoT-Forge.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1F48DF362B8150A400D163F4 /* IoT-Forge */ = {
+			isa = PBXGroup;
+			children = (
+				1F48DF4E2B8150D400D163F4 /* Core */,
+				1F48DF372B8150A400D163F4 /* AppDelegate.swift */,
+				1F48DF392B8150A400D163F4 /* SceneDelegate.swift */,
+				1F48DF3D2B8150A400D163F4 /* Main.storyboard */,
+				1F48DF432B8150A600D163F4 /* Assets.xcassets */,
+				1F48DF452B8150A600D163F4 /* LaunchScreen.storyboard */,
+				1F48DF482B8150A600D163F4 /* Info.plist */,
+				1F48DF402B8150A400D163F4 /* IoT_Forge.xcdatamodeld */,
+			);
+			path = "IoT-Forge";
+			sourceTree = "<group>";
+		};
+		1F48DF4E2B8150D400D163F4 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				1F48DF3B2B8150A400D163F4 /* UserDevicesController.swift */,
+				1F48DF4F2B8154F900D163F4 /* DataHelper.swift */,
+				1F48DF512B81551800D163F4 /* BLEHelper.swift */,
+				1F48DF532B815FCB00D163F4 /* ExploreDevicesController.swift */,
+				1F48DF552B81677600D163F4 /* Structures.swift */,
+				1F48DF592B81727200D163F4 /* DeviceProfileCell.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1F48DF332B8150A400D163F4 /* IoT-Forge */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F48DF4B2B8150A600D163F4 /* Build configuration list for PBXNativeTarget "IoT-Forge" */;
+			buildPhases = (
+				1F48DF302B8150A400D163F4 /* Sources */,
+				1F48DF312B8150A400D163F4 /* Frameworks */,
+				1F48DF322B8150A400D163F4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "IoT-Forge";
+			productName = "IoT-Forge";
+			productReference = 1F48DF342B8150A400D163F4 /* IoT-Forge.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1F48DF2C2B8150A400D163F4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					1F48DF332B8150A400D163F4 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+				};
+			};
+			buildConfigurationList = 1F48DF2F2B8150A400D163F4 /* Build configuration list for PBXProject "IoT-Forge" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1F48DF2B2B8150A400D163F4;
+			productRefGroup = 1F48DF352B8150A400D163F4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1F48DF332B8150A400D163F4 /* IoT-Forge */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1F48DF322B8150A400D163F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F48DF472B8150A600D163F4 /* LaunchScreen.storyboard in Resources */,
+				1F48DF442B8150A600D163F4 /* Assets.xcassets in Resources */,
+				1F48DF3F2B8150A400D163F4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1F48DF302B8150A400D163F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F48DF422B8150A400D163F4 /* IoT_Forge.xcdatamodeld in Sources */,
+				1F48DF542B815FCB00D163F4 /* ExploreDevicesController.swift in Sources */,
+				1F48DF3C2B8150A400D163F4 /* UserDevicesController.swift in Sources */,
+				1F48DF382B8150A400D163F4 /* AppDelegate.swift in Sources */,
+				1F48DF5A2B81727200D163F4 /* DeviceProfileCell.swift in Sources */,
+				1F48DF522B81551800D163F4 /* BLEHelper.swift in Sources */,
+				1F48DF3A2B8150A400D163F4 /* SceneDelegate.swift in Sources */,
+				1F48DF502B8154F900D163F4 /* DataHelper.swift in Sources */,
+				1F48DF562B81677600D163F4 /* Structures.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1F48DF3D2B8150A400D163F4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1F48DF3E2B8150A400D163F4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1F48DF452B8150A600D163F4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1F48DF462B8150A600D163F4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1F48DF492B8150A600D163F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1F48DF4A2B8150A600D163F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1F48DF4C2B8150A600D163F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7SKF7H2JT2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "IoT-Forge/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Iot Forge";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "local.IoT-Forge";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		1F48DF4D2B8150A600D163F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7SKF7H2JT2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "IoT-Forge/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Iot Forge";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "local.IoT-Forge";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1F48DF2F2B8150A400D163F4 /* Build configuration list for PBXProject "IoT-Forge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F48DF492B8150A600D163F4 /* Debug */,
+				1F48DF4A2B8150A600D163F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1F48DF4B2B8150A600D163F4 /* Build configuration list for PBXNativeTarget "IoT-Forge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F48DF4C2B8150A600D163F4 /* Debug */,
+				1F48DF4D2B8150A600D163F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1F48DF402B8150A400D163F4 /* IoT_Forge.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1F48DF412B8150A400D163F4 /* IoT_Forge.xcdatamodel */,
+			);
+			currentVersion = 1F48DF412B8150A400D163F4 /* IoT_Forge.xcdatamodel */;
+			path = IoT_Forge.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 1F48DF2C2B8150A400D163F4 /* Project object */;
+}
