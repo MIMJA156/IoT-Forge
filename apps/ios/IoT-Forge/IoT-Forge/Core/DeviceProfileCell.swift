@@ -52,11 +52,10 @@ class DeviceConfigurationProfileCell: UITableViewCell {
 
             modelLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
             modelLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            modelLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            modelLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
 
-            versionLabel.topAnchor.constraint(equalTo: modelLabel.bottomAnchor, constant: 4),
-            versionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            versionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            versionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
+            versionLabel.leadingAnchor.constraint(equalTo: modelLabel.trailingAnchor, constant: 10),
             versionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
         ])
     }

@@ -13,8 +13,7 @@ class ExploreDevicesController: UIViewController, UITableViewDelegate, UITableVi
     let tableView = UITableView()
     
     var tableViewData: [TableViewSection] = [
-        TableViewSection<DeviceConfigurationProfile>(title: "Built In", data: []),
-        TableViewSection<DeviceConfigurationProfile>(title: "External", data: [])
+        TableViewSection<DeviceConfigurationProfile>(title: "Built In", data: [])
     ]
     
     override func viewWillAppear(_ animated: Bool) {
@@ -23,11 +22,6 @@ class ExploreDevicesController: UIViewController, UITableViewDelegate, UITableVi
         setTableViewSectionDataBasedOnTitle(
             title: "Built In",
             data: dataHelper.getLocalDeviceConfigurationProfiles()
-        )
-        
-        setTableViewSectionDataBasedOnTitle(
-            title: "External",
-            data: dataHelper.getCloudDeviceConfigurationProfiles()
         )
     }
     
@@ -69,8 +63,16 @@ class ExploreDevicesController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = DeviceConfigurationProfileCell()
+        
+        let chevron = UIImageView(image: UIImage(systemName: "chevron.right"))
+        cell.accessoryView = chevron
+        
         cell.configure(with: tableViewData[indexPath.section].data[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(tableViewData[indexPath.section].data[indexPath.row])
     }
     
     func setTableViewSectionDataBasedOnTitle(title: String, data: [DeviceConfigurationProfile]) {
