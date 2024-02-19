@@ -48,7 +48,8 @@ class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewD
         noDevicesLabel.translatesAutoresizingMaskIntoConstraints = false
         noDevicesLabel.isHidden = true
         
-        noDevicesLabel.text = "You Have No Devices"
+        noDevicesLabel.text = "you have no devices"
+        noDevicesLabel.font = .systemFont(ofSize: 22, weight: .light)
         noDevicesLabel.textAlignment = .center
     }
     

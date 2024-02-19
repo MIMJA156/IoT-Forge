@@ -24,9 +24,9 @@ class DataHelper {
     func getLocalDeviceConfigurationProfiles() -> [DeviceConfigurationProfile] {
         return [
             DeviceConfigurationProfile(
-                title: "My Cool Local Device",
+                title: "A Cool Local Device",
                 model: "XYZ-1001A",
-                current_version: "01.00.00",
+                version: "01.00.00",
                 description: "WOW! This device profile is stored locally.",
                 
                 bluetooth: DeviceConfigurationProfileBluetooth(
@@ -37,16 +37,19 @@ class DataHelper {
             DeviceConfigurationProfile(
                 title: "Another Local Device",
                 model: "ABC-2002B",
-                current_version: "02.01.01",
+                version: "02.01.01",
                 description: nil,
                 bluetooth: DeviceConfigurationProfileBluetooth(pairing: "basic", instructions: nil)
             ),
             DeviceConfigurationProfile(
                 title: "Additional Local Device",
                 model: "GHI-4004D",
-                current_version: "04.03.03",
+                version: "04.03.03",
                 description: "No way, this one is also stored locally? How cool! Although I wish we had more than three local devices.",
-                bluetooth: DeviceConfigurationProfileBluetooth(pairing: "basic", instructions: nil)
+                bluetooth: DeviceConfigurationProfileBluetooth(
+                    pairing: "basic",
+                    instructions: "Please hold down the center button for 3 seconds then pull the nob out and twist it clockwise. Wait for three beeps (about 15s), once you hear the beeps, let go of the button and nob. Wait until the light stops bleanking and then do 15 jumping jacks and finally press the pairing button on the back of the device."
+                )
             ),
         ]
     }
@@ -56,7 +59,7 @@ class DataHelper {
             DeviceConfigurationProfile(
                 title: "External Device",
                 model: "DEF-3003C",
-                current_version: "03.02.02",
+                version: "03.02.02",
                 description: "This device profile was downloaded from the cloud!",
                 bluetooth: DeviceConfigurationProfileBluetooth(pairing: "basic", instructions: nil)
             )

@@ -13,7 +13,7 @@ struct TableViewSection<T> {
 struct DeviceConfigurationProfile {
     let title: String
     let model: String
-    let current_version: String
+    let version: String
     let description: String?
     
     let bluetooth: DeviceConfigurationProfileBluetooth

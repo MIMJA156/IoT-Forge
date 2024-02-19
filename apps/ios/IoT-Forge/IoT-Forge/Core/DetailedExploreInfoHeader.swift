@@ -101,7 +101,7 @@ class DetailedExploreInfoHeader: UITableViewHeaderFooterView {
         
         titleLabel.text = profile.title
         modelLabel.text = "Model: \(profile.model)"
-        versionLabel.text = "Version: \(profile.current_version)"
+        versionLabel.text = "Version: \(profile.version)"
         
         if profile.description != nil {
             descriptionLabel.text = profile.description
