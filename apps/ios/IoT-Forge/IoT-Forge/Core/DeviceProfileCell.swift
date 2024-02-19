@@ -8,29 +8,27 @@
 import UIKit
 
 class DeviceConfigurationProfileCell: UITableViewCell {
-
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        return label
-    }()
-
-    private let modelLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14)
-        return label
-    }()
+    private let titleLabel = UILabel()
+    private let modelLabel = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        buildUI()
         setupSubviews()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        buildUI()
         setupSubviews()
+    }
+    
+    private func buildUI() {
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        
+        modelLabel.translatesAutoresizingMaskIntoConstraints = false
+        modelLabel.font = UIFont.systemFont(ofSize: 14)
     }
 
     private func setupSubviews() {

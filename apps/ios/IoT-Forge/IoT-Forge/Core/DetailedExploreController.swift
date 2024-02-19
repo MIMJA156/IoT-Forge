@@ -17,6 +17,7 @@ class DetailedExploreController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         buildUI()
+        setupSubviews()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -25,18 +26,20 @@ class DetailedExploreController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func buildUI() {
-        // BEGIN - MAIN VIEW
         view.backgroundColor = .systemBackground
-        // END - MAIN VIEW
         
-        // BEGIN - tableView
-        view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
-        tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
-        // END - tableView
+    }
+    
+    func setupSubviews() {
+        view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+        ])
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

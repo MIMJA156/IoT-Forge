@@ -7,27 +7,78 @@
 
 import UIKit
 
+class PairingController: UIViewController {
+    let titleLabel = UILabel()
+    let instructionsLabel = UILabel()
+
+    var selectedDeviceProfile: DeviceConfigurationProfile!
+    let indicator = BluetootSearchingIndicator()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        buildUI()
+        setupSubviews()
+    }
+    
+    func buildUI() {
+        view.backgroundColor = .systemBackground
+        
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        titleLabel.text = "Searcing for Device"
+        titleLabel.font = .systemFont(ofSize: 22, weight: .bold)
+        
+        
+        instructionsLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        if selectedDeviceProfile.bluetooth.instructions != nil {
+            instructionsLabel.text = selectedDeviceProfile.bluetooth.instructions
+        } else {
+            instructionsLabel.font = .italicSystemFont(ofSize: 16)
+            instructionsLabel.text = "no instructions"
+        }
+        
+        instructionsLabel.font = .systemFont(ofSize: 16)
+        instructionsLabel.textAlignment = .center
+        instructionsLabel.numberOfLines = 0
+    }
+    
+    func setupSubviews() {
+        view.addSubview(titleLabel)
+        view.addSubview(instructionsLabel)
+        view.addSubview(indicator)
+        
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            titleLabel.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor),
+            
+            instructionsLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            instructionsLabel.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 16),
+            instructionsLabel.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -16),
+            
+            indicator.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            indicator.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            indicator.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            indicator.heightAnchor.constraint(equalToConstant: 75),
+        ])
+    }
+    
+    override func viewDidLayoutSubviews() {
+        indicator.setupLayers()
+        indicator.startPulsing()
+    }
+}
+
+// -- // -- // -- // -- // -- // -- //
+// -- // -- // -- // -- // -- // -- //
+// -- // -- // -- // -- // -- // -- //
+// -- // -- // -- // -- // -- // -- //
+// -- // -- // -- // -- // -- // -- //
+// -- // -- // -- // -- // -- // -- //
+
 class BluetootSearchingIndicator: UIView {
-    private let pulsingCircleLayer: CAShapeLayer = {
-        let layer = CAShapeLayer()
-        layer.fillColor = UIColor.systemBlue.cgColor
-        layer.opacity = 0.25
-        return layer
-    }()
-    
-    private let staticCircleLayer: CAShapeLayer = {
-        let layer = CAShapeLayer()
-        layer.fillColor = UIColor.systemBlue.cgColor
-        layer.opacity = 0.5
-        return layer
-    }()
-    
-    private let bluetoothImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "bluetooth"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
     private lazy var minCirlce = UIBezierPath(
         arcCenter: CGPoint(x: self.bounds.midX, y: self.bounds.midY),
         radius: animatedCircleMinRadius,
@@ -52,6 +103,10 @@ class BluetootSearchingIndicator: UIView {
         clockwise: true
     )
     
+    private let pulsingCircleLayer = CAShapeLayer()
+    private let staticCircleLayer = CAShapeLayer()
+    private let bluetoothImageView = UIImageView(image: UIImage(named: "bluetooth"))
+    
     private let animatedCircleMaxRadius: CGFloat = 200
     private let animatedCircleMinRadius: CGFloat = 25
     private let animationDuration: CGFloat = 2 // seconds
@@ -61,12 +116,24 @@ class BluetootSearchingIndicator: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        buildUI()
         setupSubviews()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        buildUI()
         setupSubviews()
+    }
+    
+    private func buildUI() {
+        pulsingCircleLayer.fillColor = UIColor.systemBlue.cgColor
+        pulsingCircleLayer.opacity = 0.25
+        
+        staticCircleLayer.fillColor = UIColor.systemBlue.cgColor
+        staticCircleLayer.opacity = 0.5
+        
+        bluetoothImageView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setupSubviews() {
@@ -111,79 +178,5 @@ class BluetootSearchingIndicator: UIView {
         group.repeatCount = .infinity
         
         pulsingCircleLayer.add(group, forKey: "pulseAndFadeOut")
-    }
-}
-
-class PairingController: UIViewController {
-    let pulsingCircleLayer: CAShapeLayer = {
-        let layer = CAShapeLayer()
-        layer.opacity = 0.25
-        layer.fillColor = UIColor.systemBlue.cgColor
-        return layer
-    }()
-    
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        label.text = "Searcing for Device"
-        label.font = .systemFont(ofSize: 22, weight: .bold)
-        
-        return label
-    }()
-    
-    let instructionsLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        label.font = .systemFont(ofSize: 16)
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        
-        return label
-    }()
-    
-    //--//--
-    
-    var selectedDeviceProfile: DeviceConfigurationProfile!
-    let indicator = BluetootSearchingIndicator()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        
-        setupSubviews()
-        
-        if selectedDeviceProfile.bluetooth.instructions != nil {
-            instructionsLabel.text = selectedDeviceProfile.bluetooth.instructions
-        } else {
-            instructionsLabel.font = .italicSystemFont(ofSize: 16)
-            instructionsLabel.text = "no instructions"
-        }
-    }
-    
-    func setupSubviews() {
-        view.addSubview(titleLabel)
-        view.addSubview(instructionsLabel)
-        view.addSubview(indicator)
-        
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            titleLabel.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor),
-            
-            instructionsLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
-            instructionsLabel.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 16),
-            instructionsLabel.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -16),
-            
-            indicator.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            indicator.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            indicator.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-            indicator.heightAnchor.constraint(equalToConstant: 75),
-        ])
-    }
-    
-    override func viewDidLayoutSubviews() {
-        indicator.setupLayers()
-        indicator.startPulsing()
     }
 }

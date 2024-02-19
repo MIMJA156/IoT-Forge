@@ -8,61 +8,52 @@
 import UIKit
 
 class DetailedExploreInfoHeader: UITableViewHeaderFooterView {
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-        return label
-    }()
+    private let titleLabel = UILabel()
+    private let modelLabel = UILabel()
+    private let versionLabel = UILabel()
+    private let descriptionLabel = UILabel()
     
-    private let modelLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 16, weight: .light)
-        return label
-    }()
-    
-    private let versionLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 16, weight: .light)
-        return label
-    }()
-    
-    private let descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 16)
-        label.numberOfLines = 0
-        return label
-    }()
-    
-    private let createButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        button.setTitle("Add", for: .normal)
-        button.setTitleColor(.label, for: .normal)
-        
-        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .regular)
-        button.backgroundColor = .systemGray5
-        
-        button.layer.cornerRadius = 5
-        button.layer.borderColor = .some(UIColor.black.cgColor)
-        button.layer.borderWidth = 1
-        
-        return button
-    }()
+    private let createButton = UIButton(type: .system)
     private var buttonCallback: ((_ sender: UIButton) -> ())!
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
+        buildUI()
         setupSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        buildUI()
         setupSubviews()
+    }
+    
+    private func buildUI() {
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        
+        modelLabel.translatesAutoresizingMaskIntoConstraints = false
+        modelLabel.font = UIFont.systemFont(ofSize: 16, weight: .light)
+        
+        versionLabel.translatesAutoresizingMaskIntoConstraints = false
+        versionLabel.font = UIFont.systemFont(ofSize: 16, weight: .light)
+        
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.font = .systemFont(ofSize: 16)
+        descriptionLabel.numberOfLines = 0
+        
+        
+        createButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        createButton.setTitle("Add", for: .normal)
+        createButton.setTitleColor(.label, for: .normal)
+        
+        createButton.titleLabel?.font = .systemFont(ofSize: 20, weight: .regular)
+        createButton.backgroundColor = .systemGray5
+        
+        createButton.layer.cornerRadius = 5
+        createButton.layer.borderColor = .some(UIColor.black.cgColor)
+        createButton.layer.borderWidth = 1
     }
 
     private func setupSubviews() {

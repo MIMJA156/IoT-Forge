@@ -23,21 +23,16 @@ class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         buildUI()
+        setupSubviews()
         
         tableView.delegate = self
         tableView.dataSource = self
     }
     
     func buildUI() {
-        // BEGIN - MAIN VIEW
         title = "My Devices"
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
-        
-//        let titleLabel = UILabel()
-//        titleLabel.text = "My Devices"
-//        titleLabel.font = .boldSystemFont(ofSize: 26)
-//        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: titleLabel)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Explore Devices",
@@ -45,30 +40,33 @@ class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewD
             target: self,
             action: #selector(headToNewDeviceScreen)
         )
-        // END - MAIN VIEW
+
         
-        // BEGIN - tableView
-        view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
-        // END - tableView
         
-        // BEGIN - noDevicesLabel
+
+        noDevicesLabel.translatesAutoresizingMaskIntoConstraints = false
         noDevicesLabel.isHidden = true
         
         noDevicesLabel.text = "You Have No Devices"
         noDevicesLabel.textAlignment = .center
-        
+    }
+    
+    func setupSubviews() {
+        view.addSubview(tableView)
         view.addSubview(noDevicesLabel)
-        noDevicesLabel.translatesAutoresizingMaskIntoConstraints = false
-        noDevicesLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        noDevicesLabel.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        noDevicesLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        noDevicesLabel.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        // END - noDevicesLabel
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            
+            noDevicesLabel.topAnchor.constraint(equalTo: view.topAnchor),
+            noDevicesLabel.leftAnchor.constraint(equalTo: view.leftAnchor),
+            noDevicesLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            noDevicesLabel.rightAnchor.constraint(equalTo: view.rightAnchor),
+        ])
     }
     
     @objc func headToNewDeviceScreen() {
