@@ -14,4 +14,5 @@ struct DeviceConfigurationProfile {
     let title: String
     let model: String
     let current_version: String
+    let description: String?
 }

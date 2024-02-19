@@ -40,7 +40,7 @@ class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewD
 //        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: titleLabel)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "New Device",
+            title: "Explore Devices",
             style: .done,
             target: self,
             action: #selector(headToNewDeviceScreen)

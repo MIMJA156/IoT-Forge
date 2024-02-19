@@ -10,7 +10,10 @@ import UIKit
 class ExploreDevicesController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let dataHelper = DataHelper.shared
     
-    let tableView = UITableView()
+    lazy var tableView: UITableView = {
+        let table = UITableView(frame: self.view.bounds, style: .plain)
+        return table
+    }()
     
     var tableViewData: [TableViewSection] = [
         TableViewSection<DeviceConfigurationProfile>(title: "Built In", data: [])
@@ -72,7 +75,9 @@ class ExploreDevicesController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(tableViewData[indexPath.section].data[indexPath.row])
+        let next = DetailedExploreController()
+        next.selectedDeviceConfigurationProfile = tableViewData[indexPath.section].data[indexPath.row]
+        navigationController?.pushViewController(next, animated: true)
     }
     
     func setTableViewSectionDataBasedOnTitle(title: String, data: [DeviceConfigurationProfile]) {
