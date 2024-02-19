@@ -34,13 +34,13 @@ class PairingController: UIViewController {
         instructionsLabel.translatesAutoresizingMaskIntoConstraints = false
         
         if selectedDeviceProfile.bluetooth.instructions != nil {
+            instructionsLabel.font = .systemFont(ofSize: 16)
             instructionsLabel.text = selectedDeviceProfile.bluetooth.instructions
         } else {
             instructionsLabel.font = .italicSystemFont(ofSize: 16)
             instructionsLabel.text = "no instructions"
         }
         
-        instructionsLabel.font = .systemFont(ofSize: 16)
         instructionsLabel.textAlignment = .center
         instructionsLabel.numberOfLines = 0
     }
