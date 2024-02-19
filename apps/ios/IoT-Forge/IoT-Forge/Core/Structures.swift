@@ -15,4 +15,11 @@ struct DeviceConfigurationProfile {
     let model: String
     let current_version: String
     let description: String?
+    
+    let bluetooth: DeviceConfigurationProfileBluetooth
+}
+
+struct DeviceConfigurationProfileBluetooth {
+    let pairing: String
+    let instructions: String?
 }

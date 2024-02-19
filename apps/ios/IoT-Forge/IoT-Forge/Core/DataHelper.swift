@@ -27,19 +27,26 @@ class DataHelper {
                 title: "My Cool Local Device",
                 model: "XYZ-1001A",
                 current_version: "01.00.00",
-                description: "WOW! This device profile is stored locally."
+                description: "WOW! This device profile is stored locally.",
+                
+                bluetooth: DeviceConfigurationProfileBluetooth(
+                    pairing: "basic",
+                    instructions: "Hold down the power button until the light turns yellow (5s) then release."
+                )
             ),
             DeviceConfigurationProfile(
                 title: "Another Local Device",
                 model: "ABC-2002B",
                 current_version: "02.01.01",
-                description: nil
+                description: nil,
+                bluetooth: DeviceConfigurationProfileBluetooth(pairing: "basic", instructions: nil)
             ),
             DeviceConfigurationProfile(
                 title: "Additional Local Device",
                 model: "GHI-4004D",
                 current_version: "04.03.03",
-                description: "No way, this one is also stored locally? How cool! Although I wish we had more than three local devices."
+                description: "No way, this one is also stored locally? How cool! Although I wish we had more than three local devices.",
+                bluetooth: DeviceConfigurationProfileBluetooth(pairing: "basic", instructions: nil)
             ),
         ]
     }
@@ -50,7 +57,8 @@ class DataHelper {
                 title: "External Device",
                 model: "DEF-3003C",
                 current_version: "03.02.02",
-                description: "This device profile was downloaded from the cloud!"
+                description: "This device profile was downloaded from the cloud!",
+                bluetooth: DeviceConfigurationProfileBluetooth(pairing: "basic", instructions: nil)
             )
         ]
     }
