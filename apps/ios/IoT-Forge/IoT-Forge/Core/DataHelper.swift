@@ -5,10 +5,14 @@
 //  Created by Mizia, Miles - Student on 2/17/24.
 //
 
+import CoreBluetooth
+
 class DataHelper {
     static let shared = DataHelper()
     
     private var mem_devices: [String] = []
+    
+    static let universalBLEUUID = CBUUID(string: "A25503A0-49CE-4821-A3F2-25D11DAB7188")
     
     func getSavedDevices() -> [String] {
         return mem_devices

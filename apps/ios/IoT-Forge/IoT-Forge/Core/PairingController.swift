@@ -6,16 +6,21 @@
 //
 
 import UIKit
+import CoreBluetooth
 
-class PairingController: UIViewController {
+class PairingController: UIViewController, BLEManagerDelegate {
     let titleLabel = UILabel()
     let instructionsLabel = UILabel()
 
     var selectedDeviceProfile: DeviceConfigurationProfile!
     let indicator = BluetootSearchingIndicator()
     
+    let ble = BLEManager.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ble.delegate = self
         
         buildUI()
         setupSubviews()
@@ -69,6 +74,58 @@ class PairingController: UIViewController {
         indicator.setupLayers()
         indicator.startPulsing()
     }
+    
+    
+    //-------------------------//
+    //-------------------------//
+    //----//---- BLE ----//----//
+    //-------------------------//
+    //-------------------------//
+    
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        switch central.state {
+        case .poweredOn:
+            print("powereOn")
+            ble.scan(with: [DataHelper.universalBLEUUID])
+            
+        case .poweredOff:
+            print("Powered Off")
+            
+        case .unauthorized:
+            print("Unauthorized")
+            
+        case .unknown:
+            print("Unknown")
+            
+        case .resetting:
+            print("Resetting")
+            
+        case .unsupported:
+            print("Unsupported")
+            
+        @unknown default:
+            fatalError("Unexpected Bluetooth state")
+        }
+    }
+    
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        let raw: [CBUUID: Data] = advertisementData["kCBAdvDataServiceData"] as! [CBUUID: Data]
+        
+        if let data = raw[DataHelper.universalBLEUUID] {
+            let isPairing = data[9] == 2 ? true : false
+            
+            if (isPairing) {
+                ble.connect(peripheral: peripheral)
+                print("connecting to device!")
+            }
+        }
+    }
+    
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {}
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {}
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {}
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {}
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {}
 }
 
 // -- // -- // -- // -- // -- // -- //
