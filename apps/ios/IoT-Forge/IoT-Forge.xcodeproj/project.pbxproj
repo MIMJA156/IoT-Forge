@@ -22,6 +22,7 @@
 		1F48DF5D2B829E6200D163F4 /* PairingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF5C2B829E6200D163F4 /* PairingController.swift */; };
 		1F48DF5F2B829E9400D163F4 /* DetailedExploreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF5E2B829E9400D163F4 /* DetailedExploreController.swift */; };
 		1F48DF632B82C8D000D163F4 /* DetailedExploreInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF622B82C8D000D163F4 /* DetailedExploreInfoHeader.swift */; };
+		1FC9FF392B84406500DA0338 /* InitialConfigurationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC9FF382B84406400DA0338 /* InitialConfigurationScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		1F48DF5C2B829E6200D163F4 /* PairingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingController.swift; sourceTree = "<group>"; };
 		1F48DF5E2B829E9400D163F4 /* DetailedExploreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedExploreController.swift; sourceTree = "<group>"; };
 		1F48DF622B82C8D000D163F4 /* DetailedExploreInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedExploreInfoHeader.swift; sourceTree = "<group>"; };
+		1FC9FF382B84406400DA0338 /* InitialConfigurationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialConfigurationScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				1F48DF5C2B829E6200D163F4 /* PairingController.swift */,
 				1F48DF5E2B829E9400D163F4 /* DetailedExploreController.swift */,
 				1F48DF622B82C8D000D163F4 /* DetailedExploreInfoHeader.swift */,
+				1FC9FF382B84406400DA0338 /* InitialConfigurationScreen.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FC9FF392B84406500DA0338 /* InitialConfigurationScreen.swift in Sources */,
 				1F48DF5F2B829E9400D163F4 /* DetailedExploreController.swift in Sources */,
 				1F48DF422B8150A400D163F4 /* IoT_Forge.xcdatamodeld in Sources */,
 				1F48DF542B815FCB00D163F4 /* ExploreDevicesController.swift in Sources */,

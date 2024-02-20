@@ -12,18 +12,43 @@ class PairingController: UIViewController, BLEManagerDelegate {
     let titleLabel = UILabel()
     let instructionsLabel = UILabel()
 
+    var token: UInt32!
     var selectedDeviceProfile: DeviceConfigurationProfile!
     let indicator = BluetootSearchingIndicator()
     
+    let pairingAlert: UIAlertController = {
+        let alert = UIAlertController(
+            title: "pairing",
+            message: nil,
+            preferredStyle: .alert
+        )
+        
+        let indicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        indicator.hidesWhenStopped = true
+        indicator.style = .large
+        indicator.startAnimating()
+        
+        alert.view.addSubview(indicator)
+        
+        return alert
+    }()
+    
     let ble = BLEManager.shared
+    
+    override func viewWillAppear(_ animated: Bool) {
+        ble.delegate = self
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ble.delegate = self
-        
         buildUI()
         setupSubviews()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        indicator.setupLayers()
+        indicator.startPulsing()
     }
     
     func buildUI() {
@@ -70,11 +95,6 @@ class PairingController: UIViewController, BLEManagerDelegate {
         ])
     }
     
-    override func viewDidLayoutSubviews() {
-        indicator.setupLayers()
-        indicator.startPulsing()
-    }
-    
     
     //-------------------------//
     //-------------------------//
@@ -85,26 +105,10 @@ class PairingController: UIViewController, BLEManagerDelegate {
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
         case .poweredOn:
-            print("powereOn")
             ble.scan(with: [DataHelper.universalBLEUUID])
             
-        case .poweredOff:
-            print("Powered Off")
-            
-        case .unauthorized:
-            print("Unauthorized")
-            
-        case .unknown:
-            print("Unknown")
-            
-        case .resetting:
-            print("Resetting")
-            
-        case .unsupported:
-            print("Unsupported")
-            
-        @unknown default:
-            fatalError("Unexpected Bluetooth state")
+        default:
+            print("other state")
         }
     }
     
@@ -113,19 +117,77 @@ class PairingController: UIViewController, BLEManagerDelegate {
         
         if let data = raw[DataHelper.universalBLEUUID] {
             let isPairing = data[9] == 2 ? true : false
+            let model = String(data: data[0...8], encoding: .ascii)
             
-            if (isPairing) {
+            if (isPairing && model == selectedDeviceProfile.model) {
                 ble.connect(peripheral: peripheral)
-                print("connecting to device!")
             }
         }
     }
     
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {}
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {}
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {}
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {}
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {}
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        present(pairingAlert, animated: true)
+        peripheral.discoverServices([DataHelper.universalBLEUUID])
+    }
+    
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        pairingAlert.dismiss(animated: true)
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        if let services = peripheral.services {
+            for service in services {
+                peripheral.discoverCharacteristics(nil, for: service)
+            }
+        }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        if let charecteristics = service.characteristics {
+            for charecteristic in charecteristics {
+                if charecteristic.uuid == DataHelper.authenticationBLEUUID {
+                    peripheral.setNotifyValue(true, for: charecteristic)
+                }
+            }
+            
+            let success = ble.write(data: Data([2]), cbuuid: DataHelper.authenticationBLEUUID)
+            print("simple pairing - get token /", success)
+        }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        if characteristic.uuid == DataHelper.authenticationBLEUUID {
+            let value: [UInt8] = [UInt8](characteristic.value!)
+            
+            if value.count == 4 {
+                token = Data(value).withUnsafeBytes { $0.load(as: UInt32.self) }
+                
+                var response = Data([1])
+                response.append(contentsOf: value)
+                
+                let success = ble.write(data: response, cbuuid: DataHelper.authenticationBLEUUID)
+                print("simple pairing - confirm token /", success)
+                
+            } else if value.count == 1 {
+                let didPassPairing = value[0]
+                
+                if didPassPairing == 1 {
+                    pairingAlert.dismiss(animated: false) {
+                        let screen = InitialConfigurationScreen()
+                        screen.selectedDeviceProfile = self.selectedDeviceProfile
+                        screen.token = self.token
+                        
+                        self.navigationController?.pushViewController(
+                            screen,
+                            animated: true
+                        )
+                    }
+                } else {
+                    ble.disconnect()
+                }
+            }
+        }
+    }
 }
 
 // -- // -- // -- // -- // -- // -- //
@@ -233,6 +295,7 @@ class BluetootSearchingIndicator: UIView {
         group.animations = [pulse, fade]
         group.duration = animationDuration
         group.repeatCount = .infinity
+        group.isRemovedOnCompletion = false
         
         pulsingCircleLayer.add(group, forKey: "pulseAndFadeOut")
     }

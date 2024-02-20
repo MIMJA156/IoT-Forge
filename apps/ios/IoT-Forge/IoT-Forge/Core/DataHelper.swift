@@ -13,6 +13,7 @@ class DataHelper {
     private var mem_devices: [String] = []
     
     static let universalBLEUUID = CBUUID(string: "A25503A0-49CE-4821-A3F2-25D11DAB7188")
+    static let authenticationBLEUUID = CBUUID(string: "E50D58B4-11F2-49C5-8D2A-D71F5A6CDE3F")
     
     func getSavedDevices() -> [String] {
         return mem_devices
