@@ -22,6 +22,8 @@
 		1F48DF5D2B829E6200D163F4 /* PairingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF5C2B829E6200D163F4 /* PairingController.swift */; };
 		1F48DF5F2B829E9400D163F4 /* DetailedExploreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF5E2B829E9400D163F4 /* DetailedExploreController.swift */; };
 		1F48DF632B82C8D000D163F4 /* DetailedExploreInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF622B82C8D000D163F4 /* DetailedExploreInfoHeader.swift */; };
+		1F975DE82B85D92700158FDC /* english-adjectives.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1F975DE72B85D92700158FDC /* english-adjectives.txt */; };
+		1F975DEA2B85D9A600158FDC /* phrase-generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F975DE92B85D9A600158FDC /* phrase-generator.swift */; };
 		1FC9FF392B84406500DA0338 /* InitialConfigurationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC9FF382B84406400DA0338 /* InitialConfigurationScreen.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,8 @@
 		1F48DF5C2B829E6200D163F4 /* PairingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingController.swift; sourceTree = "<group>"; };
 		1F48DF5E2B829E9400D163F4 /* DetailedExploreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedExploreController.swift; sourceTree = "<group>"; };
 		1F48DF622B82C8D000D163F4 /* DetailedExploreInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedExploreInfoHeader.swift; sourceTree = "<group>"; };
+		1F975DE72B85D92700158FDC /* english-adjectives.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "english-adjectives.txt"; sourceTree = "<group>"; };
+		1F975DE92B85D9A600158FDC /* phrase-generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "phrase-generator.swift"; sourceTree = "<group>"; };
 		1FC9FF382B84406400DA0338 /* InitialConfigurationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialConfigurationScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +88,8 @@
 				1F48DF452B8150A600D163F4 /* LaunchScreen.storyboard */,
 				1F48DF482B8150A600D163F4 /* Info.plist */,
 				1F48DF402B8150A400D163F4 /* IoT_Forge.xcdatamodeld */,
+				1F975DE72B85D92700158FDC /* english-adjectives.txt */,
+				1F975DE92B85D9A600158FDC /* phrase-generator.swift */,
 			);
 			path = "IoT-Forge";
 			sourceTree = "<group>";
@@ -164,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F48DF472B8150A600D163F4 /* LaunchScreen.storyboard in Resources */,
+				1F975DE82B85D92700158FDC /* english-adjectives.txt in Resources */,
 				1F48DF442B8150A600D163F4 /* Assets.xcassets in Resources */,
 				1F48DF3F2B8150A400D163F4 /* Main.storyboard in Resources */,
 			);
@@ -188,6 +195,7 @@
 				1F48DF3A2B8150A400D163F4 /* SceneDelegate.swift in Sources */,
 				1F48DF502B8154F900D163F4 /* DataHelper.swift in Sources */,
 				1F48DF632B82C8D000D163F4 /* DetailedExploreInfoHeader.swift in Sources */,
+				1F975DEA2B85D9A600158FDC /* phrase-generator.swift in Sources */,
 				1F48DF562B81677600D163F4 /* Structures.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

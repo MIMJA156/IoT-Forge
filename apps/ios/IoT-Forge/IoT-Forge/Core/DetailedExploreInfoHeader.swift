@@ -92,12 +92,6 @@ class DetailedExploreInfoHeader: UITableViewHeaderFooterView {
         buttonCallback = addCallback
         
         createButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        createButton.addTarget(self, action: #selector(animateButtonOnTouchDown), for: .touchDown)
-        
-        createButton.addTarget(
-            self, action: #selector(animateButtonOnTouchUp),
-            for: [.touchUpInside, .touchUpOutside, .touchCancel]
-        )
         
         titleLabel.text = profile.title
         modelLabel.text = "Model: \(profile.model)"
@@ -113,17 +107,5 @@ class DetailedExploreInfoHeader: UITableViewHeaderFooterView {
 
     @objc func buttonPressed(sender: UIButton) {
         buttonCallback(sender)
-    }
-
-    @objc func animateButtonOnTouchDown(sender: UIButton) {
-        sender.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-        sender.backgroundColor = .systemGray4
-    }
-
-    @objc func animateButtonOnTouchUp(sender: UIButton) {
-        UIView.animate(withDuration: 0.2) {
-            sender.transform = .identity
-            sender.backgroundColor = .systemGray5
-        }
     }
 }

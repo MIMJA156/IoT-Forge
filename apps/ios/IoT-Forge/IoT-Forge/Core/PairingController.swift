@@ -11,10 +11,10 @@ import CoreBluetooth
 class PairingController: UIViewController, BLEManagerDelegate {
     let titleLabel = UILabel()
     let instructionsLabel = UILabel()
-
+    let indicator = BluetootSearchingIndicator()
+    
     var token: UInt32!
     var selectedDeviceProfile: DeviceConfigurationProfile!
-    let indicator = BluetootSearchingIndicator()
     
     let pairingAlert: UIAlertController = {
         let alert = UIAlertController(

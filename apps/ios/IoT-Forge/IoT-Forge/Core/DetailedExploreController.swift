@@ -29,6 +29,7 @@ class DetailedExploreController: UIViewController, UITableViewDataSource, UITabl
         view.backgroundColor = .systemBackground
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delaysContentTouches = false
     }
     
     func setupSubviews() {
