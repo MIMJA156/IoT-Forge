@@ -36,7 +36,26 @@ class DataHelper {
                 
                 bluetooth: DeviceConfigurationProfileBluetooth(
                     pairing: "basic",
-                    instructions: "Hold down the power button until the light turns yellow (5s) then release."
+                    instructions: "Hold down the power button on the device until the light turns yellow (2s) then release."
+                ),
+                settings: DeviceConfigurationProfileSettings(
+                    additionalConfig: true,
+                    structure: [
+                        DeviceConfigurationProfileSettingsBoolean(
+                            name: "Testing Boolean",
+                            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut at auctor eros. Sed convallis nisl.",
+                            value: nil),
+                        
+                        DeviceConfigurationProfileSettingsInteger(
+                            name: "Testing Number",
+                            info: nil,
+                            value: nil),
+                        
+                        DeviceConfigurationProfileSettingsString(
+                            name: "Testing String",
+                            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut at auctor eros. Sed convallis nisl.",
+                            value: nil),
+                    ]
                 )
             ),
             DeviceConfigurationProfile(
@@ -44,7 +63,20 @@ class DataHelper {
                 model: "ABC-2002B",
                 version: "02.01.01",
                 description: nil,
-                bluetooth: DeviceConfigurationProfileBluetooth(pairing: "basic", instructions: nil)
+                bluetooth: DeviceConfigurationProfileBluetooth(pairing: "basic", instructions: nil),
+                settings: DeviceConfigurationProfileSettings(
+                    additionalConfig: false,
+                    structure: [
+                        DeviceConfigurationProfileSettingsBoolean(
+                            name: "My fun boolean",
+                            value: false),
+                        
+                        DeviceConfigurationProfileSettingsInteger(
+                            name: "Wow this is an int?",
+                            info: "It even has a limit so you can only enter values within the correct range :3",
+                            value: 50)
+                    ]
+                )
             ),
             DeviceConfigurationProfile(
                 title: "Additional Local Device",
@@ -54,20 +86,24 @@ class DataHelper {
                 bluetooth: DeviceConfigurationProfileBluetooth(
                     pairing: "basic",
                     instructions: "Please hold down the center button for 3 seconds then pull the nob out and twist it clockwise. Wait for three beeps (about 15s), once you hear the beeps, let go of the button and nob. Wait until the light stops bleanking and then do 15 jumping jacks and finally press the pairing button on the back of the device."
+                ),
+                settings: DeviceConfigurationProfileSettings(
+                    additionalConfig: false,
+                    structure: []
                 )
             ),
         ]
     }
     
-    func getCloudDeviceConfigurationProfiles() -> [DeviceConfigurationProfile] {
-        return [
-            DeviceConfigurationProfile(
-                title: "External Device",
-                model: "DEF-3003C",
-                version: "03.02.02",
-                description: "This device profile was downloaded from the cloud!",
-                bluetooth: DeviceConfigurationProfileBluetooth(pairing: "basic", instructions: nil)
-            )
-        ]
-    }
+//    func getCloudDeviceConfigurationProfiles() -> [DeviceConfigurationProfile] {
+//        return [
+//            DeviceConfigurationProfile(
+//                title: "External Device",
+//                model: "DEF-3003C",
+//                version: "03.02.02",
+//                description: "This device profile was downloaded from the cloud!",
+//                bluetooth: DeviceConfigurationProfileBluetooth(pairing: "basic", instructions: nil)
+//            )
+//        ]
+//    }
 }

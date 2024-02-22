@@ -16,6 +16,7 @@ class InitialConfigurationScreen: UIViewController, BLEManagerDelegate, UITextFi
     
     var selectedDeviceProfile: DeviceConfigurationProfile!
     var token: UInt32!
+    var nickname: String!
     
     let ble = BLEManager.shared
     
@@ -28,6 +29,10 @@ class InitialConfigurationScreen: UIViewController, BLEManagerDelegate, UITextFi
         super.viewDidLoad()
         buildUI()
         setupSubviews()
+        
+        if selectedDeviceProfile.settings.additionalConfig {
+            nextButton.setTitle("Next", for: .normal)
+        }
     }
     
     func buildUI() {
@@ -65,6 +70,7 @@ class InitialConfigurationScreen: UIViewController, BLEManagerDelegate, UITextFi
         
         
         nextButton.translatesAutoresizingMaskIntoConstraints = false
+        nextButton.addTarget(self, action: #selector(completionButtonClicked), for: .touchUpInside)
         
         nextButton.setTitle("Save", for: .normal)
         nextButton.setTitleColor(.label, for: .normal)
@@ -123,6 +129,39 @@ class InitialConfigurationScreen: UIViewController, BLEManagerDelegate, UITextFi
         present(alert, animated: true)
     }
     
+    @objc func completionButtonClicked() {
+        var text: String!
+        let name = getValidateName()
+        
+        if name == nil { text = nameTextField.placeholder }
+        else { text = name }
+        
+        nickname = text
+        
+        if selectedDeviceProfile.settings.additionalConfig {
+            let nextController = AdditionalConfigurationScreen()
+            
+            selectedDeviceProfile.nickname = nickname
+            selectedDeviceProfile.bluetooth.token = token
+            
+            nextController.selectedDeviceProfile = selectedDeviceProfile
+            navigationController?.pushViewController(nextController, animated: true)
+        } else {
+            print("do some kind of saving action")
+        }
+    }
+    
+    func getValidateName() -> String? {
+        let text = nameTextField.text
+        var result: String? = nil
+        
+        if text != "" && text != nil {
+            result = text
+        }
+        
+        return result
+    }
+    
     func centralManagerDidUpdateState(_ central: CBCentralManager) {}
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {}
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {}
@@ -130,17 +169,4 @@ class InitialConfigurationScreen: UIViewController, BLEManagerDelegate, UITextFi
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {}
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {}
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {}
-}
-
-// oh cool, will probably remove later
-extension UITextField {
-    func underlined(color: UIColor){
-        let border = CALayer()
-        let width = CGFloat(2.0)
-        border.borderColor = color.cgColor
-        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width, height: self.frame.size.height)
-        border.borderWidth = width
-        self.layer.addSublayer(border)
-        self.layer.masksToBounds = true
-    }
 }
