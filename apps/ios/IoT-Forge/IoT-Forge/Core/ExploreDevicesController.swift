@@ -50,7 +50,7 @@ class ExploreDevicesController: UIViewController, UITableViewDelegate, UITableVi
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
         ])
     }
@@ -78,6 +78,8 @@ class ExploreDevicesController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         let next = DetailedExploreController()
         next.selectedDeviceConfigurationProfile = tableViewData[indexPath.section].data[indexPath.row]
         navigationController?.pushViewController(next, animated: true)

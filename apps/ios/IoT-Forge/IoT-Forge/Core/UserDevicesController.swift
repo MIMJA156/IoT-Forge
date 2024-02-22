@@ -10,7 +10,9 @@ import UIKit
 class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let dataHelper = DataHelper.shared
     
-    let tableView = UITableView()
+    lazy var tableView: UITableView = {
+        UITableView(frame: self.view.bounds, style: .plain)
+    }()
     let noDevicesLabel = UILabel()
     
     var savedDevices: [String] = []
@@ -60,7 +62,7 @@ class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewD
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             
             noDevicesLabel.topAnchor.constraint(equalTo: view.topAnchor),

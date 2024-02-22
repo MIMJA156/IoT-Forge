@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import CoreBluetooth
 
-class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITableViewDataSource, BLEManagerDelegate {
     lazy var tableView: UITableView = {
         UITableView(frame: self.view.bounds, style: .grouped)
     }()
@@ -15,6 +16,13 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
     var selectedDeviceProfile: DeviceConfigurationProfile!
     var unSetSettings: [DeviceConfigurationProfileSettingsGeneric] = []
     var unSetSettingsIndexMap: [Int] = []
+    
+    let ble = BLEManager.shared
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ble.delegate = self
+    }
     
     override func viewDidLoad() {
         buildUI()
@@ -56,6 +64,13 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
         title = "Additional Configuration"
         view.backgroundColor = .systemBackground
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: "Cancel",
+            image: nil,
+            target: self,
+            action: #selector(backButtonClicked)
+        )
+        
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -69,6 +84,21 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
         ])
+    }
+    
+    @objc func backButtonClicked() {
+        let alert = UIAlertController(title: "Cancel?", message: "Are you sure you want to cancel?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "no", style: .cancel))
+        alert.addAction(UIAlertAction(title: "yes", style: .destructive, handler: { _ in
+            self.ble.disconnect()
+            self.navigationController?.popToViewController(
+                (self.navigationController?.viewControllers[2])!,
+                animated: true
+            )
+        }))
+        
+        present(alert, animated: true)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -135,9 +165,19 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         let nextView = AdditionalConfigurationEditingScreen()
         nextView.selectedIndex = indexPath.section
         nextView.selectedSetting = unSetSettings[indexPath.section]
         navigationController?.pushViewController(nextView, animated: true)
     }
+    
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {}
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {}
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {}
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {}
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {}
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {}
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {}
 }
