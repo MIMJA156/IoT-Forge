@@ -22,6 +22,7 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         ble.delegate = self
+        tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -70,6 +71,8 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
             target: self,
             action: #selector(backButtonClicked)
         )
+        
+        navigationItem.backButtonTitle = "Back"
         
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -167,10 +170,20 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let nextView = AdditionalConfigurationEditingScreen()
-        nextView.selectedIndex = indexPath.section
-        nextView.selectedSetting = unSetSettings[indexPath.section]
-        navigationController?.pushViewController(nextView, animated: true)
+        switch unSetSettings[indexPath.section].type {
+        case .string:
+            let nextView = AdditionalConfigurationEditingScreen()
+            
+            nextView.selectedIndex = indexPath.section
+            nextView.selectedSetting = unSetSettings[indexPath.section]
+            nextView.coreConfigScreen = self
+            
+            navigationController?.pushViewController(nextView, animated: true)
+            break
+            
+        default:
+            break
+        }
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {}

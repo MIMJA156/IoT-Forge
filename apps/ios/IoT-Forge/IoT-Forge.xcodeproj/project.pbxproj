@@ -23,6 +23,7 @@
 		1F48DF5F2B829E9400D163F4 /* DetailedExploreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF5E2B829E9400D163F4 /* DetailedExploreController.swift */; };
 		1F48DF632B82C8D000D163F4 /* DetailedExploreInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF622B82C8D000D163F4 /* DetailedExploreInfoHeader.swift */; };
 		1F53CB042B86898100AB0DBA /* AdditionalConfigurationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F53CB032B86898100AB0DBA /* AdditionalConfigurationScreen.swift */; };
+		1F81B2C92B89094400F70CEE /* AdditionalConfigurationEditingScreenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F81B2C82B89094400F70CEE /* AdditionalConfigurationEditingScreenCell.swift */; };
 		1F9013C52B86F968006482FF /* AdditionalConfigurationEditingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9013C42B86F968006482FF /* AdditionalConfigurationEditingScreen.swift */; };
 		1F975DE82B85D92700158FDC /* english-adjectives.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1F975DE72B85D92700158FDC /* english-adjectives.txt */; };
 		1F975DEA2B85D9A600158FDC /* phrase-generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F975DE92B85D9A600158FDC /* phrase-generator.swift */; };
@@ -48,6 +49,7 @@
 		1F48DF5E2B829E9400D163F4 /* DetailedExploreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedExploreController.swift; sourceTree = "<group>"; };
 		1F48DF622B82C8D000D163F4 /* DetailedExploreInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedExploreInfoHeader.swift; sourceTree = "<group>"; };
 		1F53CB032B86898100AB0DBA /* AdditionalConfigurationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalConfigurationScreen.swift; sourceTree = "<group>"; };
+		1F81B2C82B89094400F70CEE /* AdditionalConfigurationEditingScreenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalConfigurationEditingScreenCell.swift; sourceTree = "<group>"; };
 		1F9013C42B86F968006482FF /* AdditionalConfigurationEditingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalConfigurationEditingScreen.swift; sourceTree = "<group>"; };
 		1F975DE72B85D92700158FDC /* english-adjectives.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "english-adjectives.txt"; sourceTree = "<group>"; };
 		1F975DE92B85D9A600158FDC /* phrase-generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "phrase-generator.swift"; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				1FC9FF382B84406400DA0338 /* InitialConfigurationScreen.swift */,
 				1F53CB032B86898100AB0DBA /* AdditionalConfigurationScreen.swift */,
 				1F9013C42B86F968006482FF /* AdditionalConfigurationEditingScreen.swift */,
+				1F81B2C82B89094400F70CEE /* AdditionalConfigurationEditingScreenCell.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				1F9013C52B86F968006482FF /* AdditionalConfigurationEditingScreen.swift in Sources */,
 				1F48DF3A2B8150A400D163F4 /* SceneDelegate.swift in Sources */,
 				1F48DF502B8154F900D163F4 /* DataHelper.swift in Sources */,
+				1F81B2C92B89094400F70CEE /* AdditionalConfigurationEditingScreenCell.swift in Sources */,
 				1F48DF632B82C8D000D163F4 /* DetailedExploreInfoHeader.swift in Sources */,
 				1F975DEA2B85D9A600158FDC /* phrase-generator.swift in Sources */,
 				1F48DF562B81677600D163F4 /* Structures.swift in Sources */,
