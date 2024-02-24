@@ -93,6 +93,7 @@ class AdditionalConfigurationEditingScreen: UIViewController, UITableViewDataSou
             if isValidTextString(text: cleanedText) {
                 var stringSetting = selectedSetting as! DeviceConfigurationProfileSettingsString
                 stringSetting.value = cleanedText
+                
                 coreConfigScreen.updateSettingsItem(index: selectedIndex, setting: stringSetting)
                 navigationController?.popViewController(animated: true)
             } else {
