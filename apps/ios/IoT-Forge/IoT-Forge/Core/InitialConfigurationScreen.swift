@@ -30,8 +30,6 @@ class InitialConfigurationScreen: UIViewController, BLEManagerDelegate, UITextFi
         buildUI()
         setupSubviews()
         
-        selectedDeviceProfile = DataHelper().getLocalDeviceConfigurationProfiles().first
-        
         if selectedDeviceProfile.settings.additionalConfig {
             actionButton.setTitle("Next", for: .normal)
         }

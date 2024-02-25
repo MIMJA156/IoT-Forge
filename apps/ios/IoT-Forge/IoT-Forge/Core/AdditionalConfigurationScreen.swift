@@ -44,22 +44,8 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
                 currentCount += 1
             }
         }
-    }
-    
-    func testForNilSetting(item: DeviceConfigurationProfileSettingsGeneric) -> Bool {
-        switch item.type {
-        case .string:
-            let a = item as! DeviceConfigurationProfileSettingsString
-            return a.value == nil
-            
-        case .integer:
-            let a = item as! DeviceConfigurationProfileSettingsInteger
-            return a.value == nil
-            
-        case .boolean:
-            let a = item as! DeviceConfigurationProfileSettingsBoolean
-            return a.value == nil
-        }
+        
+        setAllBooleansToFalse()
     }
     
     func buildUI() {
@@ -88,7 +74,6 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
                 NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue
             ]
         )
-        
         actionButton.setAttributedTitle(crossed, for: .disabled)
         actionButton.setTitleColor(.label, for: .disabled)
         
@@ -106,10 +91,6 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
         actionButton.isEnabled = false
     }
     
-    @objc func completionButtonClicked() {
-        print("do some kind of saving action")
-    }
-    
     func setupSubviews() {
         view.addSubview(tableView)
         view.addSubview(actionButton)
@@ -125,6 +106,71 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
             actionButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -16),
             actionButton.heightAnchor.constraint(equalToConstant: 45),
         ])
+    }
+    
+    func updateSettingsItem(index: Int, setting: DeviceConfigurationProfileSettingsGeneric) {
+        unSetSettings[index] = setting
+        updateDoneButton()
+    }
+    
+    func setAllBooleansToFalse() {
+        for (index, setting) in unSetSettings.enumerated() {
+            switch setting.type {
+            case .boolean:
+                var item = (setting as! DeviceConfigurationProfileSettingsBoolean)
+                item.value = false
+                updateSettingsItem(index: index, setting: item)
+                break
+                
+            default:
+                break
+            }
+        }
+    }
+    
+    func testForNilSetting(item: DeviceConfigurationProfileSettingsGeneric) -> Bool {
+        switch item.type {
+        case .string:
+            let a = item as! DeviceConfigurationProfileSettingsString
+            return a.value == nil
+            
+        case .integer:
+            let a = item as! DeviceConfigurationProfileSettingsInteger
+            return a.value == nil
+            
+        case .boolean:
+            let a = item as! DeviceConfigurationProfileSettingsBoolean
+            return a.value == nil
+        }
+    }
+    
+    func updateDoneButton() {
+        var isGood = true
+        
+        for setting in unSetSettings {
+            switch setting.type {
+            case .boolean:
+                let value = (setting as! DeviceConfigurationProfileSettingsBoolean).value
+                if value == nil { isGood = false }
+                break
+                
+            case .integer:
+                let value = (setting as! DeviceConfigurationProfileSettingsInteger).value
+                if value == nil { isGood = false }
+                break
+                
+            case .string:
+                let value = (setting as! DeviceConfigurationProfileSettingsString).value
+                if value == nil { isGood = false }
+                break
+            }
+        }
+        
+        if isGood { actionButton.isEnabled = true }
+    }
+    
+    @objc func completionButtonClicked() {
+        print("do some kind of saving action")
     }
     
     @objc func backButtonClicked() {
@@ -197,16 +243,6 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
         
         cell.contentConfiguration = config
         return cell
-    }
-    
-    func updateSettingsItem(index: Int, setting: DeviceConfigurationProfileSettingsGeneric) {
-        unSetSettings[index] = setting
-        updateDoneButton()
-    }
-    
-    func updateDoneButton() {
-        print("update")
-        actionButton.isEnabled = true
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

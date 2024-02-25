@@ -33,6 +33,7 @@ class AdditionalConfigurationScreenBooleanCell: UITableViewCell {
         
         
         toggle.translatesAutoresizingMaskIntoConstraints = false
+        toggle.addTarget(self, action: #selector(didToggleSwitch), for: .valueChanged)
     }
 
     private func setupSubviews() {
