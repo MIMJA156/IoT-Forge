@@ -57,6 +57,13 @@ class AdditionalConfigurationEditingScreenCell: UITableViewCell {
             let value = (with as! DeviceConfigurationProfileSettingsString).value
             if value != nil { textFeild.text = value }
             break
+        
+        case .integer:
+            let value = (with as! DeviceConfigurationProfileSettingsInteger).value
+            if value != nil { textFeild.text = "\(value!)" }
+            
+            textFeild.keyboardType = .numbersAndPunctuation
+            break
             
         default:
             break

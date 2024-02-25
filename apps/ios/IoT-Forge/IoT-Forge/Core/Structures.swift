@@ -59,7 +59,7 @@ struct DeviceConfigurationProfileSettingsInteger: DeviceConfigurationProfileSett
     var name: String
     var info: String?
     
-    var value: Int?
+    var value: Int32?
 }
 
 struct DeviceConfigurationProfileSettingsBoolean: DeviceConfigurationProfileSettingsGeneric {

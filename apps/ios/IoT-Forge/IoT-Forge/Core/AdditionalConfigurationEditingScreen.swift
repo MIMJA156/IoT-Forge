@@ -97,7 +97,17 @@ class AdditionalConfigurationEditingScreen: UIViewController, UITableViewDataSou
                 coreConfigScreen.updateSettingsItem(index: selectedIndex, setting: stringSetting)
                 navigationController?.popViewController(animated: true)
             } else {
-                print("invalid")
+                print("invalid / string")
+            }
+        } else if selectedSetting.type == .integer {
+            if isValidTextInteger(text: cleanedText) {
+                var integerSetting = selectedSetting as! DeviceConfigurationProfileSettingsInteger
+                integerSetting.value = Int32(cleanedText!)
+                
+                coreConfigScreen.updateSettingsItem(index: selectedIndex, setting: integerSetting)
+                navigationController?.popViewController(animated: true)
+            } else {
+                print("invalid / integer")
             }
         }
         
@@ -110,6 +120,15 @@ class AdditionalConfigurationEditingScreen: UIViewController, UITableViewDataSou
         if text == nil { isValid = false } else
         if text!.isEmpty { isValid = false }
 
+        return isValid
+    }
+    
+    func isValidTextInteger(text: String?) -> Bool {
+        var isValid = true
+        
+        if text == nil { isValid = false } else
+        if Int32(text!) == nil { isValid = false }
+        
         return isValid
     }
 }

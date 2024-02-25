@@ -12,6 +12,7 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
     lazy var tableView: UITableView = {
         UITableView(frame: self.view.bounds, style: .grouped)
     }()
+    let actionButton = UIButton(type: .system)
     
     var selectedDeviceProfile: DeviceConfigurationProfile!
     var unSetSettings: [DeviceConfigurationProfileSettingsGeneric] = []
@@ -76,16 +77,53 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
         
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        actionButton.addTarget(self, action: #selector(completionButtonClicked), for: .touchUpInside)
+        
+        let crossed = NSAttributedString(
+            string: "Save",
+            attributes: [
+                NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue
+            ]
+        )
+        
+        actionButton.setAttributedTitle(crossed, for: .disabled)
+        actionButton.setTitleColor(.label, for: .disabled)
+        
+        let normal = NSAttributedString(string: "Save")
+        actionButton.setAttributedTitle(normal, for: .normal)
+        actionButton.setTitleColor(.label, for: .normal)
+        
+        actionButton.titleLabel?.font = .systemFont(ofSize: 20, weight: .regular)
+        actionButton.backgroundColor = .systemGray5
+        
+        actionButton.layer.cornerRadius = 5
+        actionButton.layer.borderColor = .some(UIColor.black.cgColor)
+        actionButton.layer.borderWidth = 1
+        
+        actionButton.isEnabled = false
+    }
+    
+    @objc func completionButtonClicked() {
+        print("do some kind of saving action")
     }
     
     func setupSubviews() {
         view.addSubview(tableView)
+        view.addSubview(actionButton)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            
+            actionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
+            actionButton.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 16),
+            actionButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -16),
+            actionButton.heightAnchor.constraint(equalToConstant: 45),
         ])
     }
     
@@ -113,50 +151,48 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        unSetSettings[section].info
+        return unSetSettings[section].info
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-        cell.accessoryType = .disclosureIndicator
-        
-        var config = cell.defaultContentConfiguration()
         let unkownSettingsItem = unSetSettings[indexPath.section]
-        config.text = unkownSettingsItem.name
         
         switch unkownSettingsItem.type {
         case .string:
             let item = unkownSettingsItem as! DeviceConfigurationProfileSettingsString
-            if item.value == nil {
-                config.secondaryAttributedText = NSAttributedString(string: "required", attributes: [
-                    .foregroundColor: UIColor.red
-                ])
-            } else {
-                config.secondaryText = item.value!
-            }
-            break
+            return buildDefualtCellWithTittleAndContent(title: unkownSettingsItem.name, content: item.value, indexPath: indexPath)
             
         case .integer:
             let item = unkownSettingsItem as! DeviceConfigurationProfileSettingsInteger
-            if item.value == nil {
-                config.secondaryAttributedText = NSAttributedString(string: "required", attributes: [
-                    .foregroundColor: UIColor.red
-                ])
-            } else {
-                config.secondaryText = "\(item.value!)"
-            }
-            break
+            let content = item.value != nil ? "\(item.value!)" : nil
+            return buildDefualtCellWithTittleAndContent(title: unkownSettingsItem.name, content: content, indexPath: indexPath)
             
         case .boolean:
-            let item = unkownSettingsItem as! DeviceConfigurationProfileSettingsBoolean
-            if item.value == nil {
-                config.secondaryAttributedText = NSAttributedString(string: "required", attributes: [
-                    .foregroundColor: UIColor.red
-                ])
-            } else {
-                config.secondaryText = "\(item.value!)"
+            let cell = AdditionalConfigurationScreenBooleanCell()
+            cell.configure(with: unkownSettingsItem)
+            cell.didToggle = { (isOn) -> () in
+                let index = indexPath.section
+                var selected = self.unSetSettings[index] as! DeviceConfigurationProfileSettingsBoolean
+                selected.value = isOn
+                self.updateSettingsItem(index: index, setting: selected)
             }
-            break
+            return cell
+        }
+    }
+    
+    func buildDefualtCellWithTittleAndContent(title: String, content: String?, indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+        cell.accessoryType = .disclosureIndicator
+        
+        var config = cell.defaultContentConfiguration()
+        config.text = title
+        
+        if content == nil {
+            config.secondaryAttributedText = NSAttributedString(string: "required", attributes: [
+                .foregroundColor: UIColor.red
+            ])
+        } else {
+            config.secondaryText = content
         }
         
         cell.contentConfiguration = config
@@ -165,13 +201,19 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
     
     func updateSettingsItem(index: Int, setting: DeviceConfigurationProfileSettingsGeneric) {
         unSetSettings[index] = setting
+        updateDoneButton()
+    }
+    
+    func updateDoneButton() {
+        print("update")
+        actionButton.isEnabled = true
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch unSetSettings[indexPath.section].type {
-        case .string:
+        case .string, .integer:
             let nextView = AdditionalConfigurationEditingScreen()
             
             nextView.selectedIndex = indexPath.section

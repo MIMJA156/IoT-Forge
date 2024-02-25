@@ -12,7 +12,7 @@ class InitialConfigurationScreen: UIViewController, BLEManagerDelegate, UITextFi
     let titleLabel = UILabel()
     let instructionsLabel = UILabel()
     let nameTextField = UITextField()
-    let nextButton = UIButton(type: .system)
+    let actionButton = UIButton(type: .system)
     
     var selectedDeviceProfile: DeviceConfigurationProfile!
     var token: UInt32!
@@ -30,8 +30,10 @@ class InitialConfigurationScreen: UIViewController, BLEManagerDelegate, UITextFi
         buildUI()
         setupSubviews()
         
+        selectedDeviceProfile = DataHelper().getLocalDeviceConfigurationProfiles().first
+        
         if selectedDeviceProfile.settings.additionalConfig {
-            nextButton.setTitle("Next", for: .normal)
+            actionButton.setTitle("Next", for: .normal)
         }
     }
     
@@ -69,25 +71,25 @@ class InitialConfigurationScreen: UIViewController, BLEManagerDelegate, UITextFi
         nameTextField.autocapitalizationType = .none
         
         
-        nextButton.translatesAutoresizingMaskIntoConstraints = false
-        nextButton.addTarget(self, action: #selector(completionButtonClicked), for: .touchUpInside)
+        actionButton.translatesAutoresizingMaskIntoConstraints = false
+        actionButton.addTarget(self, action: #selector(completionButtonClicked), for: .touchUpInside)
         
-        nextButton.setTitle("Save", for: .normal)
-        nextButton.setTitleColor(.label, for: .normal)
+        actionButton.setTitle("Save", for: .normal)
+        actionButton.setTitleColor(.label, for: .normal)
         
-        nextButton.titleLabel?.font = .systemFont(ofSize: 20, weight: .regular)
-        nextButton.backgroundColor = .systemGray5
+        actionButton.titleLabel?.font = .systemFont(ofSize: 20, weight: .regular)
+        actionButton.backgroundColor = .systemGray5
         
-        nextButton.layer.cornerRadius = 5
-        nextButton.layer.borderColor = .some(UIColor.black.cgColor)
-        nextButton.layer.borderWidth = 1
+        actionButton.layer.cornerRadius = 5
+        actionButton.layer.borderColor = .some(UIColor.black.cgColor)
+        actionButton.layer.borderWidth = 1
     }
     
     func setupSubviews() {
         view.addSubview(titleLabel)
         view.addSubview(instructionsLabel)
         view.addSubview(nameTextField)
-        view.addSubview(nextButton)
+        view.addSubview(actionButton)
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 16),
@@ -102,10 +104,10 @@ class InitialConfigurationScreen: UIViewController, BLEManagerDelegate, UITextFi
             nameTextField.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -32),
             nameTextField.heightAnchor.constraint(equalToConstant: 40),
             
-            nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
-            nextButton.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 16),
-            nextButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -16),
-            nextButton.heightAnchor.constraint(equalToConstant: 45),
+            actionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
+            actionButton.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor, constant: 16),
+            actionButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -16),
+            actionButton.heightAnchor.constraint(equalToConstant: 45),
         ])
     }
     
