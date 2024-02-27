@@ -113,5 +113,10 @@ class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if let nextView = dataHelper.modelToControllerInstance(model: savedDevices[indexPath.row].model) {
+            nextView.profile = savedDevices[indexPath.row]
+            navigationController?.pushViewController(nextView, animated: true)
+        }
     }
 }

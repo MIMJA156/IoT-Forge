@@ -41,9 +41,9 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
             if isNil {
                 unSetSettings.append(item)
                 unSetSettingsIndexMap.append(currentCount)
-            } else {
-                currentCount += 1
             }
+            
+            currentCount += 1
         }
         
         setAllBooleansToFalse()
@@ -171,6 +171,7 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
     }
     
     @objc func completionButtonClicked() {
+        mergeToFinal()
         let _ = dataHelper.addSavedDevices(new: selectedDeviceProfile)
         self.ble.disconnect()
         self.navigationController?.popToViewController(
@@ -192,6 +193,13 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
         }))
         
         present(alert, animated: true)
+    }
+    
+    func mergeToFinal() {
+        for (i, unSetSetting) in unSetSettings.enumerated() {
+            let index = unSetSettingsIndexMap[i]
+            selectedDeviceProfile.settings.structure[index] = unSetSetting
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

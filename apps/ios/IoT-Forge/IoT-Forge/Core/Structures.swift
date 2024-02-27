@@ -5,6 +5,12 @@
 //  Created by Mizia, Miles - Student on 2/17/24.
 //
 
+import UIKit
+
+class LocalSystem: UIViewController {
+    var profile: DeviceConfigurationProfile!
+}
+
 enum DeviceConfigurationProfileSettingsTypes {
     case string
     case integer
@@ -37,7 +43,7 @@ struct DeviceConfigurationProfileBluetooth {
 
 struct DeviceConfigurationProfileSettings {
     let additionalConfig: Bool
-    let structure: [DeviceConfigurationProfileSettingsGeneric]
+    var structure: [DeviceConfigurationProfileSettingsGeneric]
 }
 
 protocol DeviceConfigurationProfileSettingsGeneric {

@@ -28,6 +28,7 @@
 		1F9013C52B86F968006482FF /* AdditionalConfigurationEditingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9013C42B86F968006482FF /* AdditionalConfigurationEditingScreen.swift */; };
 		1F975DE82B85D92700158FDC /* english-adjectives.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1F975DE72B85D92700158FDC /* english-adjectives.txt */; };
 		1F975DEA2B85D9A600158FDC /* phrase-generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F975DE92B85D9A600158FDC /* phrase-generator.swift */; };
+		1FAF92612B8D9E7F00621C2B /* MyFirstTestDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAF92602B8D9E7F00621C2B /* MyFirstTestDevice.swift */; };
 		1FC9FF392B84406500DA0338 /* InitialConfigurationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC9FF382B84406400DA0338 /* InitialConfigurationScreen.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		1F9013C42B86F968006482FF /* AdditionalConfigurationEditingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalConfigurationEditingScreen.swift; sourceTree = "<group>"; };
 		1F975DE72B85D92700158FDC /* english-adjectives.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "english-adjectives.txt"; sourceTree = "<group>"; };
 		1F975DE92B85D9A600158FDC /* phrase-generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "phrase-generator.swift"; sourceTree = "<group>"; };
+		1FAF92602B8D9E7F00621C2B /* MyFirstTestDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFirstTestDevice.swift; sourceTree = "<group>"; };
 		1FC9FF382B84406400DA0338 /* InitialConfigurationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialConfigurationScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +90,7 @@
 		1F48DF362B8150A400D163F4 /* IoT-Forge */ = {
 			isa = PBXGroup;
 			children = (
+				1FAF925E2B8D9DBC00621C2B /* Devices */,
 				1F48DF4E2B8150D400D163F4 /* Core */,
 				1F48DF372B8150A400D163F4 /* AppDelegate.swift */,
 				1F48DF392B8150A400D163F4 /* SceneDelegate.swift */,
@@ -121,6 +124,22 @@
 				1F81B2CA2B8B080500F70CEE /* AdditionalConfigurationScreenBooleanCell.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		1FAF925E2B8D9DBC00621C2B /* Devices */ = {
+			isa = PBXGroup;
+			children = (
+				1FAF925F2B8D9DE300621C2B /* XYZ-1001A */,
+			);
+			path = Devices;
+			sourceTree = "<group>";
+		};
+		1FAF925F2B8D9DE300621C2B /* XYZ-1001A */ = {
+			isa = PBXGroup;
+			children = (
+				1FAF92602B8D9E7F00621C2B /* MyFirstTestDevice.swift */,
+			);
+			path = "XYZ-1001A";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,6 +228,7 @@
 				1F9013C52B86F968006482FF /* AdditionalConfigurationEditingScreen.swift in Sources */,
 				1F48DF3A2B8150A400D163F4 /* SceneDelegate.swift in Sources */,
 				1F48DF502B8154F900D163F4 /* DataHelper.swift in Sources */,
+				1FAF92612B8D9E7F00621C2B /* MyFirstTestDevice.swift in Sources */,
 				1F81B2C92B89094400F70CEE /* AdditionalConfigurationEditingScreenCell.swift in Sources */,
 				1F48DF632B82C8D000D163F4 /* DetailedExploreInfoHeader.swift in Sources */,
 				1F975DEA2B85D9A600158FDC /* phrase-generator.swift in Sources */,

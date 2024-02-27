@@ -126,7 +126,7 @@ class PairingController: UIViewController, BLEManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        present(pairingAlert, animated: true)
+        if presentedViewController == nil { present(pairingAlert, animated: true) }
         peripheral.discoverServices([DataHelper.universalBLEUUID])
     }
     
@@ -173,14 +173,18 @@ class PairingController: UIViewController, BLEManagerDelegate {
                 
                 if didPassPairing == 1 {
                     pairingAlert.dismiss(animated: false) {
-                        let screen = InitialConfigurationScreen()
-                        screen.selectedDeviceProfile = self.selectedDeviceProfile
-                        screen.token = self.token
-                        
-                        self.navigationController?.pushViewController(
-                            screen,
-                            animated: true
-                        )
+                        if self.token != 0 {
+                            let screen = InitialConfigurationScreen()
+                            screen.selectedDeviceProfile = self.selectedDeviceProfile
+                            screen.token = self.token
+                            
+                            self.navigationController?.pushViewController(
+                                screen,
+                                animated: true
+                            )
+                        } else {
+                            print("simple pairing - token invalid")
+                        }
                     }
                 } else {
                     ble.disconnect()

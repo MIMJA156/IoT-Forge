@@ -6,11 +6,15 @@
 //
 
 import CoreBluetooth
+import UIKit
 
 class DataHelper {
     static let shared = DataHelper()
     
     private var mem_devices: [DeviceConfigurationProfile] = []
+    private var modelToControllerMap: [String: LocalSystem.Type] = [
+        "XYZ-1001A": MyFirstTestDevice.self
+    ]
     
     static let universalBLEUUID = CBUUID(string: "A25503A0-49CE-4821-A3F2-25D11DAB7188")
     static let authenticationBLEUUID = CBUUID(string: "E50D58B4-11F2-49C5-8D2A-D71F5A6CDE3F")
@@ -22,6 +26,14 @@ class DataHelper {
     func addSavedDevices(new: DeviceConfigurationProfile) -> [DeviceConfigurationProfile] {
         mem_devices.append(new)
         return mem_devices
+    }
+    
+    func modelToControllerInstance(model: String) -> LocalSystem? {
+        if let controller = modelToControllerMap[model] {
+            return controller.init()
+        }
+        
+        return nil
     }
     
     //--
