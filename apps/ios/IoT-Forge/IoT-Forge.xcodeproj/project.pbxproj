@@ -22,14 +22,14 @@
 		1F48DF5D2B829E6200D163F4 /* PairingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF5C2B829E6200D163F4 /* PairingController.swift */; };
 		1F48DF5F2B829E9400D163F4 /* DetailedExploreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF5E2B829E9400D163F4 /* DetailedExploreController.swift */; };
 		1F48DF632B82C8D000D163F4 /* DetailedExploreInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48DF622B82C8D000D163F4 /* DetailedExploreInfoHeader.swift */; };
-		1F53CB042B86898100AB0DBA /* AdditionalConfigurationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F53CB032B86898100AB0DBA /* AdditionalConfigurationScreen.swift */; };
+		1F53CB042B86898100AB0DBA /* AdditionalConfigurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F53CB032B86898100AB0DBA /* AdditionalConfigurationController.swift */; };
 		1F81B2C92B89094400F70CEE /* AdditionalConfigurationEditingScreenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F81B2C82B89094400F70CEE /* AdditionalConfigurationEditingScreenCell.swift */; };
-		1F81B2CB2B8B080500F70CEE /* AdditionalConfigurationScreenBooleanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F81B2CA2B8B080500F70CEE /* AdditionalConfigurationScreenBooleanCell.swift */; };
-		1F9013C52B86F968006482FF /* AdditionalConfigurationEditingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9013C42B86F968006482FF /* AdditionalConfigurationEditingScreen.swift */; };
+		1F81B2CB2B8B080500F70CEE /* AdditionalConfigurationControllerBooleanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F81B2CA2B8B080500F70CEE /* AdditionalConfigurationControllerBooleanCell.swift */; };
+		1F9013C52B86F968006482FF /* AdditionalConfigurationEditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9013C42B86F968006482FF /* AdditionalConfigurationEditingController.swift */; };
 		1F975DE82B85D92700158FDC /* english-adjectives.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1F975DE72B85D92700158FDC /* english-adjectives.txt */; };
 		1F975DEA2B85D9A600158FDC /* phrase-generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F975DE92B85D9A600158FDC /* phrase-generator.swift */; };
 		1FAF92612B8D9E7F00621C2B /* MyFirstTestDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAF92602B8D9E7F00621C2B /* MyFirstTestDevice.swift */; };
-		1FC9FF392B84406500DA0338 /* InitialConfigurationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC9FF382B84406400DA0338 /* InitialConfigurationScreen.swift */; };
+		1FC9FF392B84406500DA0338 /* InitialConfigurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC9FF382B84406400DA0338 /* InitialConfigurationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,14 +50,14 @@
 		1F48DF5C2B829E6200D163F4 /* PairingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingController.swift; sourceTree = "<group>"; };
 		1F48DF5E2B829E9400D163F4 /* DetailedExploreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedExploreController.swift; sourceTree = "<group>"; };
 		1F48DF622B82C8D000D163F4 /* DetailedExploreInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedExploreInfoHeader.swift; sourceTree = "<group>"; };
-		1F53CB032B86898100AB0DBA /* AdditionalConfigurationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalConfigurationScreen.swift; sourceTree = "<group>"; };
+		1F53CB032B86898100AB0DBA /* AdditionalConfigurationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalConfigurationController.swift; sourceTree = "<group>"; };
 		1F81B2C82B89094400F70CEE /* AdditionalConfigurationEditingScreenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalConfigurationEditingScreenCell.swift; sourceTree = "<group>"; };
-		1F81B2CA2B8B080500F70CEE /* AdditionalConfigurationScreenBooleanCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalConfigurationScreenBooleanCell.swift; sourceTree = "<group>"; };
-		1F9013C42B86F968006482FF /* AdditionalConfigurationEditingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalConfigurationEditingScreen.swift; sourceTree = "<group>"; };
+		1F81B2CA2B8B080500F70CEE /* AdditionalConfigurationControllerBooleanCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalConfigurationControllerBooleanCell.swift; sourceTree = "<group>"; };
+		1F9013C42B86F968006482FF /* AdditionalConfigurationEditingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalConfigurationEditingController.swift; sourceTree = "<group>"; };
 		1F975DE72B85D92700158FDC /* english-adjectives.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "english-adjectives.txt"; sourceTree = "<group>"; };
 		1F975DE92B85D9A600158FDC /* phrase-generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "phrase-generator.swift"; sourceTree = "<group>"; };
 		1FAF92602B8D9E7F00621C2B /* MyFirstTestDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFirstTestDevice.swift; sourceTree = "<group>"; };
-		1FC9FF382B84406400DA0338 /* InitialConfigurationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialConfigurationScreen.swift; sourceTree = "<group>"; };
+		1FC9FF382B84406400DA0338 /* InitialConfigurationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialConfigurationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,20 +108,9 @@
 		1F48DF4E2B8150D400D163F4 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				1F48DF3B2B8150A400D163F4 /* UserDevicesController.swift */,
-				1F48DF4F2B8154F900D163F4 /* DataHelper.swift */,
-				1F48DF512B81551800D163F4 /* BLEHelper.swift */,
-				1F48DF532B815FCB00D163F4 /* ExploreDevicesController.swift */,
 				1F48DF552B81677600D163F4 /* Structures.swift */,
-				1F48DF592B81727200D163F4 /* DeviceProfileCell.swift */,
-				1F48DF5C2B829E6200D163F4 /* PairingController.swift */,
-				1F48DF5E2B829E9400D163F4 /* DetailedExploreController.swift */,
-				1F48DF622B82C8D000D163F4 /* DetailedExploreInfoHeader.swift */,
-				1FC9FF382B84406400DA0338 /* InitialConfigurationScreen.swift */,
-				1F53CB032B86898100AB0DBA /* AdditionalConfigurationScreen.swift */,
-				1F9013C42B86F968006482FF /* AdditionalConfigurationEditingScreen.swift */,
-				1F81B2C82B89094400F70CEE /* AdditionalConfigurationEditingScreenCell.swift */,
-				1F81B2CA2B8B080500F70CEE /* AdditionalConfigurationScreenBooleanCell.swift */,
+				1FAF92A32B8E690100621C2B /* Helpers */,
+				1FAF92A42B8E690E00621C2B /* Controllers */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -140,6 +129,65 @@
 				1FAF92602B8D9E7F00621C2B /* MyFirstTestDevice.swift */,
 			);
 			path = "XYZ-1001A";
+			sourceTree = "<group>";
+		};
+		1FAF92A32B8E690100621C2B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1F48DF4F2B8154F900D163F4 /* DataHelper.swift */,
+				1F48DF512B81551800D163F4 /* BLEHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		1FAF92A42B8E690E00621C2B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1F48DF3B2B8150A400D163F4 /* UserDevicesController.swift */,
+				1FAF92A92B8E6A3800621C2B /* ExploreDevices */,
+				1FAF92A52B8E697200621C2B /* DetailedExplore */,
+				1F48DF5C2B829E6200D163F4 /* PairingController.swift */,
+				1FC9FF382B84406400DA0338 /* InitialConfigurationController.swift */,
+				1FAF92A62B8E699700621C2B /* AdditionalConfiguration */,
+				1FAF92A72B8E69D800621C2B /* AdditionalConfigurationEditing */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1FAF92A52B8E697200621C2B /* DetailedExplore */ = {
+			isa = PBXGroup;
+			children = (
+				1F48DF622B82C8D000D163F4 /* DetailedExploreInfoHeader.swift */,
+				1F48DF5E2B829E9400D163F4 /* DetailedExploreController.swift */,
+			);
+			path = DetailedExplore;
+			sourceTree = "<group>";
+		};
+		1FAF92A62B8E699700621C2B /* AdditionalConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				1F81B2CA2B8B080500F70CEE /* AdditionalConfigurationControllerBooleanCell.swift */,
+				1F53CB032B86898100AB0DBA /* AdditionalConfigurationController.swift */,
+			);
+			path = AdditionalConfiguration;
+			sourceTree = "<group>";
+		};
+		1FAF92A72B8E69D800621C2B /* AdditionalConfigurationEditing */ = {
+			isa = PBXGroup;
+			children = (
+				1F81B2C82B89094400F70CEE /* AdditionalConfigurationEditingScreenCell.swift */,
+				1F9013C42B86F968006482FF /* AdditionalConfigurationEditingController.swift */,
+			);
+			path = AdditionalConfigurationEditing;
+			sourceTree = "<group>";
+		};
+		1FAF92A92B8E6A3800621C2B /* ExploreDevices */ = {
+			isa = PBXGroup;
+			children = (
+				1F48DF592B81727200D163F4 /* DeviceProfileCell.swift */,
+				1F48DF532B815FCB00D163F4 /* ExploreDevicesController.swift */,
+			);
+			path = ExploreDevices;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,18 +262,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FC9FF392B84406500DA0338 /* InitialConfigurationScreen.swift in Sources */,
+				1FC9FF392B84406500DA0338 /* InitialConfigurationController.swift in Sources */,
 				1F48DF5F2B829E9400D163F4 /* DetailedExploreController.swift in Sources */,
-				1F81B2CB2B8B080500F70CEE /* AdditionalConfigurationScreenBooleanCell.swift in Sources */,
+				1F81B2CB2B8B080500F70CEE /* AdditionalConfigurationControllerBooleanCell.swift in Sources */,
 				1F48DF422B8150A400D163F4 /* IoT_Forge.xcdatamodeld in Sources */,
-				1F53CB042B86898100AB0DBA /* AdditionalConfigurationScreen.swift in Sources */,
+				1F53CB042B86898100AB0DBA /* AdditionalConfigurationController.swift in Sources */,
 				1F48DF542B815FCB00D163F4 /* ExploreDevicesController.swift in Sources */,
 				1F48DF3C2B8150A400D163F4 /* UserDevicesController.swift in Sources */,
 				1F48DF382B8150A400D163F4 /* AppDelegate.swift in Sources */,
 				1F48DF5A2B81727200D163F4 /* DeviceProfileCell.swift in Sources */,
 				1F48DF522B81551800D163F4 /* BLEHelper.swift in Sources */,
 				1F48DF5D2B829E6200D163F4 /* PairingController.swift in Sources */,
-				1F9013C52B86F968006482FF /* AdditionalConfigurationEditingScreen.swift in Sources */,
+				1F9013C52B86F968006482FF /* AdditionalConfigurationEditingController.swift in Sources */,
 				1F48DF3A2B8150A400D163F4 /* SceneDelegate.swift in Sources */,
 				1F48DF502B8154F900D163F4 /* DataHelper.swift in Sources */,
 				1FAF92612B8D9E7F00621C2B /* MyFirstTestDevice.swift in Sources */,

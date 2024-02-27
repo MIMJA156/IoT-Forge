@@ -174,7 +174,7 @@ class PairingController: UIViewController, BLEManagerDelegate {
                 if didPassPairing == 1 {
                     pairingAlert.dismiss(animated: false) {
                         if self.token != 0 {
-                            let screen = InitialConfigurationScreen()
+                            let screen = InitialConfigurationController()
                             screen.selectedDeviceProfile = self.selectedDeviceProfile
                             screen.token = self.token
                             

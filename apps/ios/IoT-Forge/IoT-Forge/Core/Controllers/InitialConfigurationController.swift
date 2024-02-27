@@ -8,7 +8,7 @@
 import UIKit
 import CoreBluetooth
 
-class InitialConfigurationScreen: UIViewController, BLEManagerDelegate, UITextFieldDelegate {
+class InitialConfigurationController: UIViewController, BLEManagerDelegate, UITextFieldDelegate {
     let titleLabel = UILabel()
     let instructionsLabel = UILabel()
     let nameTextField = UITextField()
@@ -143,7 +143,7 @@ class InitialConfigurationScreen: UIViewController, BLEManagerDelegate, UITextFi
         selectedDeviceProfile.bluetooth.token = token
         
         if selectedDeviceProfile.settings.additionalConfig {
-            let nextController = AdditionalConfigurationScreen()
+            let nextController = AdditionalConfigurationController()
             nextController.selectedDeviceProfile = selectedDeviceProfile
             navigationController?.pushViewController(nextController, animated: true)
         } else {

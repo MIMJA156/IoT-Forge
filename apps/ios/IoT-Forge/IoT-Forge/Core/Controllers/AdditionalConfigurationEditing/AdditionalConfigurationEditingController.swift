@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AdditionalConfigurationEditingScreen: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+class AdditionalConfigurationEditingController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     lazy var tableView: UITableView = {
         UITableView(frame: self.view.bounds, style: .grouped)
     }()

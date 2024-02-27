@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AdditionalConfigurationScreenBooleanCell: UITableViewCell {
+class AdditionalConfigurationControllerBooleanCell: UITableViewCell {
     private let title = UILabel()
     private let toggle = UISwitch()
     

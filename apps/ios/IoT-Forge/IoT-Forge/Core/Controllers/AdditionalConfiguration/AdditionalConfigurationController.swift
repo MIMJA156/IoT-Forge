@@ -8,7 +8,7 @@
 import UIKit
 import CoreBluetooth
 
-class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITableViewDataSource, BLEManagerDelegate {
+class AdditionalConfigurationController: UIViewController, UITableViewDelegate, UITableViewDataSource, BLEManagerDelegate {
     lazy var tableView: UITableView = {
         UITableView(frame: self.view.bounds, style: .grouped)
     }()
@@ -228,7 +228,7 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
             return buildDefualtCellWithTittleAndContent(title: unkownSettingsItem.name, content: content, indexPath: indexPath)
             
         case .boolean:
-            let cell = AdditionalConfigurationScreenBooleanCell()
+            let cell = AdditionalConfigurationControllerBooleanCell()
             cell.configure(with: unkownSettingsItem)
             cell.didToggle = { (isOn) -> () in
                 let index = indexPath.section
@@ -264,7 +264,7 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
         
         switch unSetSettings[indexPath.section].type {
         case .string, .integer:
-            let nextView = AdditionalConfigurationEditingScreen()
+            let nextView = AdditionalConfigurationEditingController()
             
             nextView.selectedIndex = indexPath.section
             nextView.selectedSetting = unSetSettings[indexPath.section]
