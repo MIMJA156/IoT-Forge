@@ -12,6 +12,7 @@ class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewD
         UITableView(frame: self.view.bounds, style: .plain)
     }()
     let noDevicesLabel = UILabel()
+    let callToActionButton = UIButton(type: .system)
     
     var savedDevices: [DeviceConfigurationProfile] = []
     
@@ -53,23 +54,32 @@ class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewD
         
         noDevicesLabel.text = "you have no devices"
         noDevicesLabel.font = .systemFont(ofSize: 22, weight: .light)
-        noDevicesLabel.textAlignment = .center
+        
+        
+        callToActionButton.translatesAutoresizingMaskIntoConstraints = false
+        callToActionButton.isHidden = true
+        
+        callToActionButton.setTitle("explore possible devices", for: .normal)
+        callToActionButton.titleLabel?.font = .systemFont(ofSize: 20, weight: .light)
+        callToActionButton.addTarget(self, action: #selector(headToNewDeviceScreen), for: .touchUpInside)
     }
     
     func setupSubviews() {
         view.addSubview(tableView)
         view.addSubview(noDevicesLabel)
+        view.addSubview(callToActionButton)
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            tableView.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            tableView.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor),
             
-            noDevicesLabel.topAnchor.constraint(equalTo: view.topAnchor),
-            noDevicesLabel.leftAnchor.constraint(equalTo: view.leftAnchor),
-            noDevicesLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            noDevicesLabel.rightAnchor.constraint(equalTo: view.rightAnchor),
+            noDevicesLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+            noDevicesLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            
+            callToActionButton.topAnchor.constraint(equalTo: noDevicesLabel.bottomAnchor, constant: 5),
+            callToActionButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
         ])
     }
     
@@ -82,8 +92,10 @@ class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewD
         
         if count == 0 {
             noDevicesLabel.isHidden = false
+            callToActionButton.isHidden = false
         } else {
             noDevicesLabel.isHidden = true
+            callToActionButton.isHidden = true
         }
         
         return count
@@ -97,5 +109,9 @@ class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewD
         cell.contentConfiguration = config
     
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

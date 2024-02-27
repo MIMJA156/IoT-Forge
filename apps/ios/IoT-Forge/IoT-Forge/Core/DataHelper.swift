@@ -35,7 +35,7 @@ class DataHelper {
                 description: "WOW! This device profile is stored locally.",
                 bluetooth: DeviceConfigurationProfileBluetooth(
                     pairing: "basic",
-                    instructions: "Hold down the power button on the device until the light turns yellow (2s) then release."
+                    instructions: "Hold down the power button on the device until the light turns yellow (~2s) then release."
                 ),
                 settings: DeviceConfigurationProfileSettings(
                     additionalConfig: true,
@@ -59,8 +59,7 @@ class DataHelper {
             ),
             DeviceConfigurationProfile(
                 title: "Another Local Device",
-//                model: "ABC-2002B",
-                model: "XYZ-1001A",
+                model: "ABC-2002B",
                 version: "02.01.01",
                 description: nil,
                 bluetooth: DeviceConfigurationProfileBluetooth(pairing: "basic", instructions: nil),

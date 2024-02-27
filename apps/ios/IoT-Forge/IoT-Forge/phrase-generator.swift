@@ -15,11 +15,11 @@ func readFile(atPath filePath: String) -> String? {
         if let fileContent = String(data: fileData, encoding: .utf8) {
             return fileContent
         } else {
-            print("Unable to convert data to string.")
+            print("unable to convert data to string")
             return nil
         }
     } catch {
-        print("Error reading file: \(error)")
+        print("error reading file: \(error)")
         return nil
     }
 }
