@@ -19,8 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let firstViewController = InitialConfigurationScreen()
-//        let firstViewController = UserDevicesController()
+//        let firstViewController = InitialConfigurationScreen()
+        let firstViewController = UserDevicesController()
         let navigationController = UINavigationController(rootViewController: firstViewController)
 
         let window = UIWindow(windowScene: windowScene)

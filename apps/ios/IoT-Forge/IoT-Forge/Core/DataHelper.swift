@@ -10,16 +10,16 @@ import CoreBluetooth
 class DataHelper {
     static let shared = DataHelper()
     
-    private var mem_devices: [String] = []
+    private var mem_devices: [DeviceConfigurationProfile] = []
     
     static let universalBLEUUID = CBUUID(string: "A25503A0-49CE-4821-A3F2-25D11DAB7188")
     static let authenticationBLEUUID = CBUUID(string: "E50D58B4-11F2-49C5-8D2A-D71F5A6CDE3F")
     
-    func getSavedDevices() -> [String] {
+    func getSavedDevices() -> [DeviceConfigurationProfile] {
         return mem_devices
     }
     
-    func addSavedDevices(new: String) -> [String] {
+    func addSavedDevices(new: DeviceConfigurationProfile) -> [DeviceConfigurationProfile] {
         mem_devices.append(new)
         return mem_devices
     }
@@ -33,7 +33,6 @@ class DataHelper {
                 model: "XYZ-1001A",
                 version: "01.00.00",
                 description: "WOW! This device profile is stored locally.",
-                
                 bluetooth: DeviceConfigurationProfileBluetooth(
                     pairing: "basic",
                     instructions: "Hold down the power button on the device until the light turns yellow (2s) then release."
@@ -60,7 +59,8 @@ class DataHelper {
             ),
             DeviceConfigurationProfile(
                 title: "Another Local Device",
-                model: "ABC-2002B",
+//                model: "ABC-2002B",
+                model: "XYZ-1001A",
                 version: "02.01.01",
                 description: nil,
                 bluetooth: DeviceConfigurationProfileBluetooth(pairing: "basic", instructions: nil),
@@ -94,16 +94,4 @@ class DataHelper {
             ),
         ]
     }
-    
-//    func getCloudDeviceConfigurationProfiles() -> [DeviceConfigurationProfile] {
-//        return [
-//            DeviceConfigurationProfile(
-//                title: "External Device",
-//                model: "DEF-3003C",
-//                version: "03.02.02",
-//                description: "This device profile was downloaded from the cloud!",
-//                bluetooth: DeviceConfigurationProfileBluetooth(pairing: "basic", instructions: nil)
-//            )
-//        ]
-//    }
 }

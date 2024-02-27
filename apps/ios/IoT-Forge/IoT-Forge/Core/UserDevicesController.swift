@@ -8,18 +8,19 @@
 import UIKit
 
 class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let dataHelper = DataHelper.shared
-    
     lazy var tableView: UITableView = {
         UITableView(frame: self.view.bounds, style: .plain)
     }()
     let noDevicesLabel = UILabel()
     
-    var savedDevices: [String] = []
+    var savedDevices: [DeviceConfigurationProfile] = []
+    
+    let dataHelper = DataHelper.shared
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         savedDevices = dataHelper.getSavedDevices()
+        tableView.reloadData()
     }
 
     override func viewDidLoad() {
@@ -92,10 +93,9 @@ class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         var config = cell.defaultContentConfiguration()
         
-        config.text = savedDevices[indexPath.row]
+        config.text = savedDevices[indexPath.row].nickname
         cell.contentConfiguration = config
     
         return cell
     }
 }
-

@@ -14,7 +14,7 @@ class AdditionalConfigurationEditingScreen: UIViewController, UITableViewDataSou
     
     var selectedSetting: DeviceConfigurationProfileSettingsGeneric!
     var selectedIndex: Int!
-    var coreConfigScreen: AdditionalConfigurationScreen!
+    var updateFunction: ((Int, any DeviceConfigurationProfileSettingsGeneric) -> ())!
     
     let additionalConfigurationEditingScreenCell = AdditionalConfigurationEditingScreenCell()
     
@@ -94,7 +94,7 @@ class AdditionalConfigurationEditingScreen: UIViewController, UITableViewDataSou
                 var stringSetting = selectedSetting as! DeviceConfigurationProfileSettingsString
                 stringSetting.value = cleanedText
                 
-                coreConfigScreen.updateSettingsItem(index: selectedIndex, setting: stringSetting)
+                updateFunction(selectedIndex, stringSetting)
                 navigationController?.popViewController(animated: true)
             } else {
                 print("invalid / string")
@@ -104,7 +104,7 @@ class AdditionalConfigurationEditingScreen: UIViewController, UITableViewDataSou
                 var integerSetting = selectedSetting as! DeviceConfigurationProfileSettingsInteger
                 integerSetting.value = Int32(cleanedText!)
                 
-                coreConfigScreen.updateSettingsItem(index: selectedIndex, setting: integerSetting)
+                updateFunction(selectedIndex, integerSetting)
                 navigationController?.popViewController(animated: true)
             } else {
                 print("invalid / integer")

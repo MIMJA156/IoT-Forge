@@ -19,6 +19,7 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
     var unSetSettingsIndexMap: [Int] = []
     
     let ble = BLEManager.shared
+    let dataHelper = DataHelper.shared
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -170,7 +171,12 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
     }
     
     @objc func completionButtonClicked() {
-        print("do some kind of saving action")
+        let _ = dataHelper.addSavedDevices(new: selectedDeviceProfile)
+        self.ble.disconnect()
+        self.navigationController?.popToViewController(
+            (self.navigationController?.viewControllers[0])!,
+            animated: true
+        )
     }
     
     @objc func backButtonClicked() {
@@ -254,7 +260,7 @@ class AdditionalConfigurationScreen: UIViewController, UITableViewDelegate, UITa
             
             nextView.selectedIndex = indexPath.section
             nextView.selectedSetting = unSetSettings[indexPath.section]
-            nextView.coreConfigScreen = self
+            nextView.updateFunction = self.updateSettingsItem
             
             navigationController?.pushViewController(nextView, animated: true)
             break

@@ -19,6 +19,7 @@ class InitialConfigurationScreen: UIViewController, BLEManagerDelegate, UITextFi
     var nickname: String!
     
     let ble = BLEManager.shared
+    let dataHelper = DataHelper.shared
     
     override func viewWillAppear(_ animated: Bool) {
         ble.delegate = self
@@ -138,16 +139,20 @@ class InitialConfigurationScreen: UIViewController, BLEManagerDelegate, UITextFi
         
         nickname = text
         
+        selectedDeviceProfile.nickname = nickname
+        selectedDeviceProfile.bluetooth.token = token
+        
         if selectedDeviceProfile.settings.additionalConfig {
             let nextController = AdditionalConfigurationScreen()
-            
-            selectedDeviceProfile.nickname = nickname
-            selectedDeviceProfile.bluetooth.token = token
-            
             nextController.selectedDeviceProfile = selectedDeviceProfile
             navigationController?.pushViewController(nextController, animated: true)
         } else {
-            print("do some kind of saving action")
+            let _ = dataHelper.addSavedDevices(new: selectedDeviceProfile)
+            self.ble.disconnect()
+            self.navigationController?.popToViewController(
+                (self.navigationController?.viewControllers[0])!,
+                animated: true
+            )
         }
     }
     
