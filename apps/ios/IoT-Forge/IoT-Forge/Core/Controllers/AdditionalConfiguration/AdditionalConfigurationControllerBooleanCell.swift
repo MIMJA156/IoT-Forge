@@ -11,7 +11,7 @@ class AdditionalConfigurationControllerBooleanCell: UITableViewCell {
     private let title = UILabel()
     private let toggle = UISwitch()
     
-    var didToggle: (Bool)->() = {(isOn)->() in }
+    var didToggle: (Bool)->() = { (isOn)->() in }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -53,6 +53,9 @@ class AdditionalConfigurationControllerBooleanCell: UITableViewCell {
         switch with.type {
         case .boolean:
             title.text = with.name
+            if let val = (with as! DeviceConfigurationProfileSettingsBoolean).value {
+                toggle.isOn = val
+            }
             break
             
         default:

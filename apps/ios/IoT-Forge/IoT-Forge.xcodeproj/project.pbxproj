@@ -29,6 +29,7 @@
 		1F975DE82B85D92700158FDC /* english-adjectives.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1F975DE72B85D92700158FDC /* english-adjectives.txt */; };
 		1F975DEA2B85D9A600158FDC /* phrase-generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F975DE92B85D9A600158FDC /* phrase-generator.swift */; };
 		1FAF92612B8D9E7F00621C2B /* MyFirstTestDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAF92602B8D9E7F00621C2B /* MyFirstTestDevice.swift */; };
+		1FAF92AB2B8EE79600621C2B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAF92AA2B8EE79600621C2B /* Extensions.swift */; };
 		1FC9FF392B84406500DA0338 /* InitialConfigurationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC9FF382B84406400DA0338 /* InitialConfigurationController.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		1F975DE72B85D92700158FDC /* english-adjectives.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "english-adjectives.txt"; sourceTree = "<group>"; };
 		1F975DE92B85D9A600158FDC /* phrase-generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "phrase-generator.swift"; sourceTree = "<group>"; };
 		1FAF92602B8D9E7F00621C2B /* MyFirstTestDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFirstTestDevice.swift; sourceTree = "<group>"; };
+		1FAF92AA2B8EE79600621C2B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1FC9FF382B84406400DA0338 /* InitialConfigurationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialConfigurationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,6 +110,7 @@
 		1F48DF4E2B8150D400D163F4 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				1FAF92AA2B8EE79600621C2B /* Extensions.swift */,
 				1F48DF552B81677600D163F4 /* Structures.swift */,
 				1FAF92A32B8E690100621C2B /* Helpers */,
 				1FAF92A42B8E690E00621C2B /* Controllers */,
@@ -277,6 +280,7 @@
 				1F48DF3A2B8150A400D163F4 /* SceneDelegate.swift in Sources */,
 				1F48DF502B8154F900D163F4 /* DataHelper.swift in Sources */,
 				1FAF92612B8D9E7F00621C2B /* MyFirstTestDevice.swift in Sources */,
+				1FAF92AB2B8EE79600621C2B /* Extensions.swift in Sources */,
 				1F81B2C92B89094400F70CEE /* AdditionalConfigurationEditingScreenCell.swift in Sources */,
 				1F48DF632B82C8D000D163F4 /* DetailedExploreInfoHeader.swift in Sources */,
 				1F975DEA2B85D9A600158FDC /* phrase-generator.swift in Sources */,

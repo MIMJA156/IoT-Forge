@@ -90,10 +90,7 @@ class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     func disconnect() {
-        if let peripheral = peripheral {
-            central.cancelPeripheralConnection(peripheral)
-        }
-        
+        if let peripheral = peripheral { central.cancelPeripheralConnection(peripheral) }
         peripheral = nil
     }
     
