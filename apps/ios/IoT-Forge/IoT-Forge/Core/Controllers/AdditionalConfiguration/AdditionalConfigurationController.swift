@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreBluetooth
+import SwiftyJSON
 
 class AdditionalConfigurationController: UIViewController, UITableViewDelegate, UITableViewDataSource, BLEManagerDelegate {
     lazy var tableView: UITableView = {
@@ -14,8 +15,8 @@ class AdditionalConfigurationController: UIViewController, UITableViewDelegate, 
     }()
     let actionButton = UIButton(type: .system)
     
-    var selectedDeviceProfile: DeviceConfigurationProfile!
-    var unSetSettings: [DeviceConfigurationProfileSettingsGeneric] = []
+    var selectedDeviceProfile: JSON!
+    var unSetSettings = JSON(parseJSON: "[]")
     var unSetSettingsIndexMap: [Int] = []
     
     let ble = BLEManager.shared
@@ -35,11 +36,11 @@ class AdditionalConfigurationController: UIViewController, UITableViewDelegate, 
         tableView.dataSource = self
         
         var currentCount = 0
-        for item in selectedDeviceProfile.settings.structure {
+        for (_, item) in selectedDeviceProfile["settings"]["structure"].makeIterator() {
             let isNil = testForNilSetting(item: item)
             
             if isNil {
-                unSetSettings.append(item)
+                unSetSettings.arrayObject!.append(item)
                 unSetSettingsIndexMap.append(currentCount)
             }
             
@@ -109,62 +110,30 @@ class AdditionalConfigurationController: UIViewController, UITableViewDelegate, 
         ])
     }
     
-    func updateSettingsItem(index: Int, setting: DeviceConfigurationProfileSettingsGeneric) {
+    func updateSettingsItem(index: Int, setting: JSON) {
         unSetSettings[index] = setting
         updateDoneButton()
     }
     
     func setAllBooleansToFalse() {
-        for (index, setting) in unSetSettings.enumerated() {
-            switch setting.type {
-            case .boolean:
-                var item = (setting as! DeviceConfigurationProfileSettingsBoolean)
-                item.value = false
-                updateSettingsItem(index: index, setting: item)
-                break
-                
-            default:
-                break
+        for (index, setting) in unSetSettings {
+            if setting["type"] == "boolean" {
+                var new = setting
+                new["value"] = false
+                updateSettingsItem(index: Int(index)!, setting: new)
             }
         }
     }
     
-    func testForNilSetting(item: DeviceConfigurationProfileSettingsGeneric) -> Bool {
-        switch item.type {
-        case .string:
-            let a = item as! DeviceConfigurationProfileSettingsString
-            return a.value == nil
-            
-        case .integer:
-            let a = item as! DeviceConfigurationProfileSettingsInteger
-            return a.value == nil
-            
-        case .boolean:
-            let a = item as! DeviceConfigurationProfileSettingsBoolean
-            return a.value == nil
-        }
+    func testForNilSetting(item: JSON) -> Bool {
+        item["value"].isEmpty
     }
     
     func updateDoneButton() {
         var isGood = true
         
-        for setting in unSetSettings {
-            switch setting.type {
-            case .boolean:
-                let value = (setting as! DeviceConfigurationProfileSettingsBoolean).value
-                if value == nil { isGood = false }
-                break
-                
-            case .integer:
-                let value = (setting as! DeviceConfigurationProfileSettingsInteger).value
-                if value == nil { isGood = false }
-                break
-                
-            case .string:
-                let value = (setting as! DeviceConfigurationProfileSettingsString).value
-                if value == nil { isGood = false }
-                break
-            }
+        for (_, setting) in unSetSettings {
+            if setting["value"].null != nil { isGood = false }
         }
         
         if isGood { actionButton.isEnabled = true }
@@ -196,9 +165,9 @@ class AdditionalConfigurationController: UIViewController, UITableViewDelegate, 
     }
     
     func mergeToFinal() {
-        for (i, unSetSetting) in unSetSettings.enumerated() {
-            let index = unSetSettingsIndexMap[i]
-            selectedDeviceProfile.settings.structure[index] = unSetSetting
+        for (index, unSetSetting) in unSetSettings {
+            let index = unSetSettingsIndexMap[Int(index)!]
+            selectedDeviceProfile["settings"]["structure"][index] = unSetSetting
         }
     }
     
@@ -211,33 +180,42 @@ class AdditionalConfigurationController: UIViewController, UITableViewDelegate, 
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return unSetSettings[section].info
+        return unSetSettings[section]["info"].string
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let unkownSettingsItem = unSetSettings[indexPath.section]
         
-        switch unkownSettingsItem.type {
-        case .string:
-            let item = unkownSettingsItem as! DeviceConfigurationProfileSettingsString
-            return buildDefualtCellWithTittleAndContent(title: unkownSettingsItem.name, content: item.value, indexPath: indexPath)
-            
-        case .integer:
-            let item = unkownSettingsItem as! DeviceConfigurationProfileSettingsInteger
-            let content = item.value != nil ? "\(item.value!)" : nil
-            return buildDefualtCellWithTittleAndContent(title: unkownSettingsItem.name, content: content, indexPath: indexPath)
-            
-        case .boolean:
+        if unkownSettingsItem["type"] == "string" {
+            return buildDefualtCellWithTittleAndContent(
+                title: unkownSettingsItem["name"].string!,
+                content: unkownSettingsItem["value"].string,
+                indexPath: indexPath
+            )
+        }
+        
+        if unkownSettingsItem["type"] == "integer" {
+            let content = unkownSettingsItem["value"].int32 != nil ? "\(unkownSettingsItem["value"].int32!)" : nil
+            return buildDefualtCellWithTittleAndContent(
+                title: unkownSettingsItem["name"].string!,
+                content: content,
+                indexPath: indexPath
+            )
+        }
+        
+        if unkownSettingsItem["type"] == "boolean" {
             let cell = AdditionalConfigurationControllerBooleanCell()
             cell.configure(with: unkownSettingsItem)
             cell.didToggle = { (isOn) -> () in
                 let index = indexPath.section
-                var selected = self.unSetSettings[index] as! DeviceConfigurationProfileSettingsBoolean
-                selected.value = isOn
+                var selected = self.unSetSettings[index]
+                selected["value"].bool = isOn
                 self.updateSettingsItem(index: index, setting: selected)
             }
             return cell
         }
+        
+        return UITableViewCell()
     }
     
     func buildDefualtCellWithTittleAndContent(title: String, content: String?, indexPath: IndexPath) -> UITableViewCell {
@@ -262,8 +240,8 @@ class AdditionalConfigurationController: UIViewController, UITableViewDelegate, 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        switch unSetSettings[indexPath.section].type {
-        case .string, .integer:
+        switch unSetSettings[indexPath.section]["type"].string {
+        case "string", "integer":
             let nextView = AdditionalConfigurationEditingController()
             
             nextView.selectedIndex = indexPath.section

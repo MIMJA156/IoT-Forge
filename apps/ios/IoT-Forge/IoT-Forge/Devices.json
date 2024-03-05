@@ -1,0 +1,75 @@
+[
+   {
+      "title": "A Cool Local Device",
+      "model": "XYZ-1001A",
+      "version": "01.00.00",
+      "description": "WOW! This device profile is stored locally.",
+      "bluetooth": {
+         "pairing": "basic",
+         "instructions": "Hold down the power button on the device until the light turns yellow (~2s) then release."
+      },
+      "settings": {
+         "additionalConfig": true,
+         "structure": [
+            {
+               "name": "Testing Boolean",
+               "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut at auctor eros. Sed convallis nisl.",
+               "value": null,
+               "type": "boolean"
+            },
+            {
+               "name": "Testing Number",
+               "info": null,
+               "value": null,
+               "type": "integer"
+            },
+            {
+               "name": "Testing String",
+               "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut at auctor eros. Sed convallis nisl.",
+               "value": null,
+               "type": "string"
+            }
+         ]
+      }
+   },
+   {
+      "title": "Another Local Device",
+      "model": "ABC-2002B",
+      "version": "02.01.01",
+      "description": null,
+      "bluetooth": {
+         "pairing": "basic",
+         "instructions": null
+      },
+      "settings": {
+         "additionalConfig": false,
+         "structure": [
+            {
+               "name": "My fun boolean",
+               "value": false,
+               "type": "boolean"
+            },
+            {
+               "name": "Wow this is an int?",
+               "info": "It even has a limit so you can only enter values within the correct range :3",
+               "value": 50,
+               "type": "integer"
+            }
+         ]
+      }
+   },
+   {
+      "title": "Additional Local Device",
+      "model": "GHI-4004D",
+      "version": "04.03.03",
+      "description": "No way, this one is also stored locally? How cool! Although I wish we had more than three local devices.",
+      "bluetooth": {
+         "pairing": "basic",
+         "instructions": "Please hold down the center button for 3 seconds then pull the nob out and twist it clockwise. Wait for three beeps (about 15s), once you hear the beeps, let go of the button and nob. Wait until the light stops bleanking and then do 15 jumping jacks and finally press the pairing button on the back of the device."
+      },
+      "settings": {
+         "additionalConfig": false,
+         "structure": []
+      }
+   }
+]

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class AdditionalConfigurationControllerBooleanCell: UITableViewCell {
     private let title = UILabel()
@@ -49,17 +50,10 @@ class AdditionalConfigurationControllerBooleanCell: UITableViewCell {
         ])
     }
     
-    func configure(with: DeviceConfigurationProfileSettingsGeneric) {
-        switch with.type {
-        case .boolean:
-            title.text = with.name
-            if let val = (with as! DeviceConfigurationProfileSettingsBoolean).value {
-                toggle.isOn = val
-            }
-            break
-            
-        default:
-            break
+    func configure(with: JSON) {
+        if with["type"] == "boolean" {
+            title.text = with["name"].string!
+            toggle.isOn = with["value"].bool!
         }
     }
     

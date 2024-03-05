@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class AdditionalConfigurationEditingScreenCell: UITableViewCell {
     static let height: CGFloat = 45
@@ -51,15 +52,15 @@ class AdditionalConfigurationEditingScreenCell: UITableViewCell {
         return textFeild
     }
     
-    func configure(with: DeviceConfigurationProfileSettingsGeneric) {
-        switch with.type {
-        case .string:
-            let value = (with as! DeviceConfigurationProfileSettingsString).value
+    func configure(with: JSON) {
+        switch with["type"].string {
+        case "string":
+            let value = with["value"].string
             if value != nil { textFeild.text = value }
             break
         
-        case .integer:
-            let value = (with as! DeviceConfigurationProfileSettingsInteger).value
+        case "integer":
+            let value = with["value"].string
             if value != nil { textFeild.text = "\(value!)" }
             
             textFeild.keyboardType = .numbersAndPunctuation

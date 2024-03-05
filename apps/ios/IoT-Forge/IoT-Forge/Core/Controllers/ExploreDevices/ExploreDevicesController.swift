@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ExploreDevicesController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let dataHelper = DataHelper.shared
@@ -16,7 +17,7 @@ class ExploreDevicesController: UIViewController, UITableViewDelegate, UITableVi
     }()
     
     var tableViewData: [TableViewSection] = [
-        TableViewSection<DeviceConfigurationProfile>(title: "Built In", data: [])
+        TableViewSection<JSON>(title: "Built In", data: [])
     ]
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,10 +86,10 @@ class ExploreDevicesController: UIViewController, UITableViewDelegate, UITableVi
         navigationController?.pushViewController(next, animated: true)
     }
     
-    func setTableViewSectionDataBasedOnTitle(title: String, data: [DeviceConfigurationProfile]) {
+    func setTableViewSectionDataBasedOnTitle(title: String, data: JSON) {
         for (index, item) in tableViewData.enumerated() {
             if item.title == title {
-                tableViewData[index].data = data
+                tableViewData[index].data = data.arrayValue
                 break
             }
         }

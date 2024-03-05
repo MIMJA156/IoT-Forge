@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreBluetooth
+import SwiftyJSON
 
 class InitialConfigurationController: UIViewController, BLEManagerDelegate, UITextFieldDelegate {
     let titleLabel = UILabel()
@@ -14,7 +15,7 @@ class InitialConfigurationController: UIViewController, BLEManagerDelegate, UITe
     let nameTextField = UITextField()
     let actionButton = UIButton(type: .system)
     
-    var selectedDeviceProfile: DeviceConfigurationProfile!
+    var selectedDeviceProfile: JSON!
     var token: UInt32!
     var nickname: String!
     
@@ -31,7 +32,7 @@ class InitialConfigurationController: UIViewController, BLEManagerDelegate, UITe
         buildUI()
         setupSubviews()
         
-        if selectedDeviceProfile.settings.additionalConfig {
+        if selectedDeviceProfile["settings"]["additionalConfig"].bool! {
             actionButton.setTitle("Next", for: .normal)
         }
     }
@@ -139,10 +140,10 @@ class InitialConfigurationController: UIViewController, BLEManagerDelegate, UITe
         
         nickname = text
         
-        selectedDeviceProfile.nickname = nickname
-        selectedDeviceProfile.bluetooth.token = token
+        selectedDeviceProfile["nickname"].string = nickname
+        selectedDeviceProfile["bluetooth"]["token"].uInt32 = token
         
-        if selectedDeviceProfile.settings.additionalConfig {
+        if selectedDeviceProfile["settings"]["additionalConfig"].bool! {
             let nextController = AdditionalConfigurationController()
             nextController.selectedDeviceProfile = selectedDeviceProfile
             navigationController?.pushViewController(nextController, animated: true)

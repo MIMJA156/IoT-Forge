@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreBluetooth
+import SwiftyJSON
 
 class PairingController: UIViewController, BLEManagerDelegate {
     let titleLabel = UILabel()
@@ -14,7 +15,7 @@ class PairingController: UIViewController, BLEManagerDelegate {
     let indicator = BluetootSearchingIndicator()
     
     var token: UInt32!
-    var selectedDeviceProfile: DeviceConfigurationProfile!
+    var selectedDeviceProfile: JSON!
     
     let pairingAlert: UIAlertController = {
         let alert = UIAlertController(
@@ -63,9 +64,9 @@ class PairingController: UIViewController, BLEManagerDelegate {
         
         instructionsLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        if selectedDeviceProfile.bluetooth.instructions != nil {
+        if selectedDeviceProfile["bluetooth"]["instructions"].string != nil {
             instructionsLabel.font = .systemFont(ofSize: 16)
-            instructionsLabel.text = selectedDeviceProfile.bluetooth.instructions
+            instructionsLabel.text = selectedDeviceProfile["bluetooth"]["instructions"].string
         } else {
             instructionsLabel.font = .italicSystemFont(ofSize: 16)
             instructionsLabel.text = "no instructions"
@@ -119,7 +120,7 @@ class PairingController: UIViewController, BLEManagerDelegate {
             let isPairing = data[9] == 2 ? true : false
             let model = String(data: data[0...8], encoding: .ascii)
             
-            if (isPairing && model == selectedDeviceProfile.model) {
+            if (isPairing && model == selectedDeviceProfile["model"].string) {
                 ble.connect(peripheral: peripheral)
             }
         }

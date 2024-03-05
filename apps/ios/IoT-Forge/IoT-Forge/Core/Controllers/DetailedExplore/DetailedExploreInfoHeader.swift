@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class DetailedExploreInfoHeader: UITableViewHeaderFooterView {
     private let titleLabel = UILabel()
@@ -88,17 +89,17 @@ class DetailedExploreInfoHeader: UITableViewHeaderFooterView {
         ])
     }
     
-    func configure(with profile: DeviceConfigurationProfile, add addCallback: @escaping (_ sender: UIButton) -> ()) {
+    func configure(with profile: JSON, add addCallback: @escaping (_ sender: UIButton) -> ()) {
         buttonCallback = addCallback
         
         createButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         
-        titleLabel.text = profile.title
-        modelLabel.text = "Model: \(profile.model)"
-        versionLabel.text = "Version: \(profile.version)"
+        titleLabel.text = profile["title"].string
+        modelLabel.text = "Model: \(profile["model"].string!)"
+        versionLabel.text = "Version: \(profile["version"].string!)"
         
-        if profile.description != nil {
-            descriptionLabel.text = profile.description
+        if profile["description"].string != nil {
+            descriptionLabel.text = profile["description"].string
         } else {
             descriptionLabel.font = .italicSystemFont(ofSize: 16)
             descriptionLabel.text = "no description"

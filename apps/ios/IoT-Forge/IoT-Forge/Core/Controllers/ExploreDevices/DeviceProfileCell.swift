@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class DeviceConfigurationProfileCell: UITableViewCell {
     private let titleLabel = UILabel()
@@ -46,8 +47,9 @@ class DeviceConfigurationProfileCell: UITableViewCell {
         ])
     }
 
-    func configure(with profile: DeviceConfigurationProfile) {
-        titleLabel.text = profile.title
-        modelLabel.text = "Model: \(profile.model)"
+    func configure(with profile: JSON) {
+        print(profile)
+        titleLabel.text = profile["title"].string
+        modelLabel.text = "Model: \(profile["model"].string!)"
     }
 }

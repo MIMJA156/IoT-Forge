@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class LocalSystem: UIViewController {
-    var profile: DeviceConfigurationProfile!
+    var profile: JSON!
 }
 
 enum DeviceConfigurationProfileSettingsTypes {

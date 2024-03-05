@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreBluetooth
+import SwiftyJSON
 
 class MyFirstTestDevice: LocalSystem, BLEManagerDelegate {
     private let textView: UITextView = {
@@ -35,7 +36,7 @@ class MyFirstTestDevice: LocalSystem, BLEManagerDelegate {
         super.viewDidLoad()
         
         view.backgroundColor = .cyan
-        title = profile.title
+        title = profile["title"].string
         
         ble.delegate = self
         
@@ -79,49 +80,32 @@ class MyFirstTestDevice: LocalSystem, BLEManagerDelegate {
         textView.text = textRepresentation(of: profile)
     }
 
-    private func textRepresentation(of profile: DeviceConfigurationProfile) -> String {
+    private func textRepresentation(of profile: JSON) -> String {
         var result = ""
 
-        result += "Nickname: \(profile.nickname ?? "N/A")\n"
-        result += "Title: \(profile.title)\n"
-        result += "Model: \(profile.model)\n"
-        result += "Version: \(profile.version)\n"
-        result += "Description: \(profile.description ?? "N/A")\n"
+        result += "Nickname: \(profile["nickname"].string ?? "N/A")\n"
+        result += "Title: \(profile["title"].string!)\n"
+        result += "Model: \(profile["model"].string!)\n"
+        result += "Version: \(profile["version"].string!)\n"
+        result += "Description: \(profile["description"].string ?? "N/A")\n"
         result += "Bluetooth:\n"
-        result += "  Token: \(profile.bluetooth.token ?? 0)\n"
-        result += "  Pairing: \(profile.bluetooth.pairing)\n"
-        result += "  Instructions: \(profile.bluetooth.instructions ?? "N/A")\n"
+        result += "  Token: \(profile["bluetooth"]["token"].uInt32 ?? 0)\n" // finish changin the rest to use swift json
+        result += "  Pairing: \(profile["bluetooth"]["pairing"].string ?? "N/A")\n"
+        result += "  Instructions: \(profile["bluetooth"]["instructions"].string ?? "N/A")\n"
         result += "Settings:\n"
-        result += "  Additional Config: \(profile.settings.additionalConfig)\n"
+        result += "  Additional Config: \(profile["settings"]["additionalConfig"].bool!)\n"
         result += "  Structure:\n"
 
-        for setting in profile.settings.structure {
-            switch setting.type {
-            case .string:
-                if let stringSetting = setting as? DeviceConfigurationProfileSettingsString {
-                    result += "    Name: \(stringSetting.name)\n"
-                    result += "      Type: String\n"
-                    result += "      Value: \(String(describing: stringSetting.value))\n"
-                }
-            case .integer:
-                if let integerSetting = setting as? DeviceConfigurationProfileSettingsInteger {
-                    result += "    Name: \(integerSetting.name)\n"
-                    result += "      Type: Integer\n"
-                    result += "      Value: \(String(describing: integerSetting.value))\n"
-                }
-            case .boolean:
-                if let booleanSetting = setting as? DeviceConfigurationProfileSettingsBoolean {
-                    result += "    Name: \(booleanSetting.name)\n"
-                    result += "      Type: Boolean\n"
-                    result += "      Value: \(String(describing: booleanSetting.value))\n"
-                }
-            }
+        for (_, setting) in profile["settings"]["structure"] {
+            result += "    Name: \(setting["name"].string!)\n"
+            result += "      Type: \(setting["type"].string!)\n"
+            result += "      Value: \(String(describing: setting["value"]))\n"
         }
 
         return result
     }
 
-    private func createSampleDeviceConfigurationProfile() -> DeviceConfigurationProfile {
+    private func createSampleDeviceConfigurationProfile() -> JSON {
         return profile
     }
     
@@ -191,7 +175,7 @@ class MyFirstTestDevice: LocalSystem, BLEManagerDelegate {
         if let data = raw[DataHelper.universalBLEUUID] {
             let pulledModel = String(data: data[0...8], encoding: .ascii)
             
-            if (pulledModel == profile.model) {
+            if (pulledModel == profile["model"].string) {
                 ble.connect(peripheral: peripheral)
             }
         }
@@ -221,10 +205,10 @@ class MyFirstTestDevice: LocalSystem, BLEManagerDelegate {
                 data:
                     Data(
                         [1,
-                         profile.bluetooth.token![0],
-                         profile.bluetooth.token![1],
-                         profile.bluetooth.token![2],
-                         profile.bluetooth.token![3]]),
+                         profile["bluetooth"]["token"].uInt32![0],
+                         profile["bluetooth"]["token"].uInt32![1],
+                         profile["bluetooth"]["token"].uInt32![2],
+                         profile["bluetooth"]["token"].uInt32![3]]),
                 cbuuid: DataHelper.authenticationBLEUUID
             )
             print("simple auth - post token /", success)

@@ -6,15 +6,16 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class AdditionalConfigurationEditingController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     lazy var tableView: UITableView = {
         UITableView(frame: self.view.bounds, style: .grouped)
     }()
     
-    var selectedSetting: DeviceConfigurationProfileSettingsGeneric!
+    var selectedSetting: JSON!
     var selectedIndex: Int!
-    var updateFunction: ((Int, any DeviceConfigurationProfileSettingsGeneric) -> ())!
+    var updateFunction: ((Int, JSON) -> ())!
     
     let additionalConfigurationEditingScreenCell = AdditionalConfigurationEditingScreenCell()
     
@@ -39,7 +40,7 @@ class AdditionalConfigurationEditingController: UIViewController, UITableViewDat
     
     func buildUI() {
         view.backgroundColor = .systemBackground
-        title = selectedSetting.name
+        title = selectedSetting["name"].string
         
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -89,22 +90,22 @@ class AdditionalConfigurationEditingController: UIViewController, UITableViewDat
         let text = textField.text
         let cleanedText = text?.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        if selectedSetting.type == .string {
+        if selectedSetting["type"] == "string" {
             if isValidTextString(text: cleanedText) {
-                var stringSetting = selectedSetting as! DeviceConfigurationProfileSettingsString
-                stringSetting.value = cleanedText
+                var stringSetting = selectedSetting
+                stringSetting!["value"].string = cleanedText
                 
-                updateFunction(selectedIndex, stringSetting)
+                updateFunction(selectedIndex, stringSetting!)
                 navigationController?.popViewController(animated: true)
             } else {
                 print("invalid / string")
             }
-        } else if selectedSetting.type == .integer {
+        } else if selectedSetting["type"] == "integer" {
             if isValidTextInteger(text: cleanedText) {
-                var integerSetting = selectedSetting as! DeviceConfigurationProfileSettingsInteger
-                integerSetting.value = Int32(cleanedText!)
+                var integerSetting = selectedSetting
+                integerSetting!["value"].int32 = Int32(cleanedText!)
                 
-                updateFunction(selectedIndex, integerSetting)
+                updateFunction(selectedIndex, integerSetting!)
                 navigationController?.popViewController(animated: true)
             } else {
                 print("invalid / integer")

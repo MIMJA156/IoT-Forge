@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     lazy var tableView: UITableView = {
@@ -14,7 +15,7 @@ class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewD
     let noDevicesLabel = UILabel()
     let callToActionButton = UIButton(type: .system)
     
-    var savedDevices: [DeviceConfigurationProfile] = []
+    var savedDevices = JSON(stringLiteral: "[]")
     
     let dataHelper = DataHelper.shared
     
@@ -105,7 +106,7 @@ class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         var config = cell.defaultContentConfiguration()
         
-        config.text = savedDevices[indexPath.row].nickname
+        config.text = savedDevices[indexPath.row]["nickname"].string
         cell.contentConfiguration = config
     
         return cell
@@ -114,7 +115,7 @@ class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if let nextView = dataHelper.modelToControllerInstance(model: savedDevices[indexPath.row].model) {
+        if let nextView = dataHelper.modelToControllerInstance(model: savedDevices[indexPath.row]["model"].string!) {
             nextView.profile = savedDevices[indexPath.row]
             navigationController?.pushViewController(nextView, animated: true)
         }

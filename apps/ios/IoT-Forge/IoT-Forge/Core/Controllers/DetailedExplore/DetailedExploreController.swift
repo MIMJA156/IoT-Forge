@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class DetailedExploreController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var selectedDeviceConfigurationProfile: DeviceConfigurationProfile!
+    var selectedDeviceConfigurationProfile: JSON!
     
     lazy var tableView: UITableView = {
         UITableView(frame: self.view.bounds, style: .grouped)
