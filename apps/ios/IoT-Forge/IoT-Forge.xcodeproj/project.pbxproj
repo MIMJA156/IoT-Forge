@@ -26,8 +26,7 @@
 		1F81B2C92B89094400F70CEE /* AdditionalConfigurationEditingScreenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F81B2C82B89094400F70CEE /* AdditionalConfigurationEditingScreenCell.swift */; };
 		1F81B2CB2B8B080500F70CEE /* AdditionalConfigurationControllerBooleanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F81B2CA2B8B080500F70CEE /* AdditionalConfigurationControllerBooleanCell.swift */; };
 		1F9013C52B86F968006482FF /* AdditionalConfigurationEditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9013C42B86F968006482FF /* AdditionalConfigurationEditingController.swift */; };
-		1F975DE82B85D92700158FDC /* english-adjectives.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1F975DE72B85D92700158FDC /* english-adjectives.txt */; };
-		1F975DEA2B85D9A600158FDC /* phrase-generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F975DE92B85D9A600158FDC /* phrase-generator.swift */; };
+		1F975DE82B85D92700158FDC /* EnglishAdjectives.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1F975DE72B85D92700158FDC /* EnglishAdjectives.txt */; };
 		1FAF92612B8D9E7F00621C2B /* MyFirstTestDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAF92602B8D9E7F00621C2B /* MyFirstTestDevice.swift */; };
 		1FAF92AB2B8EE79600621C2B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAF92AA2B8EE79600621C2B /* Extensions.swift */; };
 		1FBA131C2B96ADA000A2C614 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 1FBA131B2B96ADA000A2C614 /* SwiftyJSON */; };
@@ -58,8 +57,7 @@
 		1F81B2C82B89094400F70CEE /* AdditionalConfigurationEditingScreenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalConfigurationEditingScreenCell.swift; sourceTree = "<group>"; };
 		1F81B2CA2B8B080500F70CEE /* AdditionalConfigurationControllerBooleanCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalConfigurationControllerBooleanCell.swift; sourceTree = "<group>"; };
 		1F9013C42B86F968006482FF /* AdditionalConfigurationEditingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalConfigurationEditingController.swift; sourceTree = "<group>"; };
-		1F975DE72B85D92700158FDC /* english-adjectives.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "english-adjectives.txt"; sourceTree = "<group>"; };
-		1F975DE92B85D9A600158FDC /* phrase-generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "phrase-generator.swift"; sourceTree = "<group>"; };
+		1F975DE72B85D92700158FDC /* EnglishAdjectives.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EnglishAdjectives.txt; sourceTree = "<group>"; };
 		1FAF92602B8D9E7F00621C2B /* MyFirstTestDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFirstTestDevice.swift; sourceTree = "<group>"; };
 		1FAF92AA2B8EE79600621C2B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1FBA131D2B96AEA800A2C614 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
@@ -98,7 +96,7 @@
 		1F48DF362B8150A400D163F4 /* IoT-Forge */ = {
 			isa = PBXGroup;
 			children = (
-				1FBA13252B96B99100A2C614 /* Devices.json */,
+				1F9900732B9D999D00C24F72 /* Data */,
 				1FAF925E2B8D9DBC00621C2B /* Devices */,
 				1F48DF4E2B8150D400D163F4 /* Core */,
 				1F48DF372B8150A400D163F4 /* AppDelegate.swift */,
@@ -108,8 +106,6 @@
 				1F48DF452B8150A600D163F4 /* LaunchScreen.storyboard */,
 				1F48DF482B8150A600D163F4 /* Info.plist */,
 				1F48DF402B8150A400D163F4 /* IoT_Forge.xcdatamodeld */,
-				1F975DE72B85D92700158FDC /* english-adjectives.txt */,
-				1F975DE92B85D9A600158FDC /* phrase-generator.swift */,
 			);
 			path = "IoT-Forge";
 			sourceTree = "<group>";
@@ -123,6 +119,15 @@
 				1FAF92A42B8E690E00621C2B /* Controllers */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		1F9900732B9D999D00C24F72 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				1F975DE72B85D92700158FDC /* EnglishAdjectives.txt */,
+				1FBA13252B96B99100A2C614 /* Devices.json */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		1FAF925E2B8D9DBC00621C2B /* Devices */ = {
@@ -267,7 +272,7 @@
 			files = (
 				1FBA13262B96B99100A2C614 /* Devices.json in Resources */,
 				1F48DF472B8150A600D163F4 /* LaunchScreen.storyboard in Resources */,
-				1F975DE82B85D92700158FDC /* english-adjectives.txt in Resources */,
+				1F975DE82B85D92700158FDC /* EnglishAdjectives.txt in Resources */,
 				1F48DF442B8150A600D163F4 /* Assets.xcassets in Resources */,
 				1F48DF3F2B8150A400D163F4 /* Main.storyboard in Resources */,
 			);
@@ -299,7 +304,6 @@
 				1FAF92AB2B8EE79600621C2B /* Extensions.swift in Sources */,
 				1F81B2C92B89094400F70CEE /* AdditionalConfigurationEditingScreenCell.swift in Sources */,
 				1F48DF632B82C8D000D163F4 /* DetailedExploreInfoHeader.swift in Sources */,
-				1F975DEA2B85D9A600158FDC /* phrase-generator.swift in Sources */,
 				1F48DF562B81677600D163F4 /* Structures.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -63,7 +63,7 @@ class InitialConfigurationController: UIViewController, BLEManagerDelegate, UITe
         
         
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
-        nameTextField.placeholder = parseAdjectivesIntoPhrase(count: 2) ?? "some-random-filler"
+        nameTextField.placeholder = getRandomAdjectivePhrase(words: 3)
         nameTextField.textAlignment = .center
         nameTextField.borderStyle = .roundedRect
         
@@ -109,6 +109,18 @@ class InitialConfigurationController: UIViewController, BLEManagerDelegate, UITe
             actionButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -16),
             actionButton.heightAnchor.constraint(equalToConstant: 45),
         ])
+    }
+    
+    func getRandomAdjectivePhrase(words: Int) -> String {
+        let adjectivesList = FileHelper.getEnglishAdjectivesList()
+        
+        var sentence = ""
+        for _ in 1...words {
+            sentence += adjectivesList[Int.random(in: 1...adjectivesList.count)] + "-"
+        }
+        sentence.removeLast()
+        
+        return sentence
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

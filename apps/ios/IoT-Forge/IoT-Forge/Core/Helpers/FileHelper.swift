@@ -19,4 +19,15 @@ class FileHelper {
             fatalError("Error reading file: \(error.localizedDescription)")
         }
     }
+    
+    static func getEnglishAdjectivesList() -> Array<Substring> {
+        let filePath = Bundle.main.path(forResource: "EnglishAdjectives", ofType: "txt")!
+        
+        do {
+            let contents = try String(contentsOfFile: filePath, encoding: .utf8)
+            return contents.split(separator: "\n")
+        } catch {
+            fatalError("Error reading file: \(error.localizedDescription)")
+        }
+    }
 }
