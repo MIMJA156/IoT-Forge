@@ -20,10 +20,6 @@
                                 "id": "setting-one",
                                 "type": "string",
                                 "name": "Setting One",
-                                
-                                "min": 1,
-                                "max": 50,
-                                "deny": ["@", "/", "-"]
                             }
                         ]
                     },
@@ -31,21 +27,27 @@
                         "id": "setting-two",
                         "type": "string",
                         "name": "Setting Two",
-                        
-                        "min": 1,
-                        "max": 50,
-                        "allow": "alphanumeric"
+                        "required": true,
+                    },
+                    {
+                        "id": "setting-three",
+                        "type": "boolean",
+                        "name": "Setting Three",
+                        "required": true,
+                    },
+                    {
+                        "id": "setting-four",
+                        "type": "integer",
+                        "name": "Setting Four",
+                        "required": true,
                     }
                 ],
                 
                 "privates": [
                     {
-                        "id": "setting-three",
+                        "id": "private-setting-one",
                         "type": "string",
                         "name": "Setting Three",
-                        
-                        "min": 1,
-                        "max": 50,
                     }
                 ]
             }

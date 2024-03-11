@@ -36,6 +36,8 @@ class AdditionalConfigurationController: UIViewController, UITableViewDelegate, 
         
         let publicItems = newSystem.profile["settings"]["structure"]["publics"].arrayValue
         settingsToSet = pullAllUnsetRequiredSettings(layer: publicItems)
+        
+        setAllBooleansToFalse()
     }
     
     func buildUI() {
@@ -96,6 +98,14 @@ class AdditionalConfigurationController: UIViewController, UITableViewDelegate, 
             actionButton.rightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.rightAnchor, constant: -16),
             actionButton.heightAnchor.constraint(equalToConstant: 45),
         ])
+    }
+    
+    func setAllBooleansToFalse() {
+        for setting in settingsToSet {
+            if setting["type"].string == "boolean" {
+                newSystem.settings[setting["id"].stringValue] = JSON(booleanLiteral: false)
+            }
+        }
     }
     
     func pullAllUnsetRequiredSettings(layer: [JSON]) -> [JSON] {
@@ -190,7 +200,7 @@ class AdditionalConfigurationController: UIViewController, UITableViewDelegate, 
         
         if unkownSettingsItem["type"] == "boolean" {
             let cell = AdditionalConfigurationControllerBooleanCell()
-            cell.configure(with: unkownSettingsItem)
+            cell.configure(with: unkownSettingsItem, value: newSystem.settings[unkownSettingsItem["id"].stringValue])
             cell.didToggle = { (isOn) -> () in
                 let index = indexPath.section
                 let id = self.settingsToSet[index]["id"].stringValue

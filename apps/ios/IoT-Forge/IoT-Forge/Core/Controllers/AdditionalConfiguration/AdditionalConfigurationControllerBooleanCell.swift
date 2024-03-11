@@ -50,10 +50,10 @@ class AdditionalConfigurationControllerBooleanCell: UITableViewCell {
         ])
     }
     
-    func configure(with: JSON) {
+    func configure(with: JSON, value: JSON) {
         if with["type"] == "boolean" {
-            title.text = with["name"].string!
-            toggle.isOn = with["value"].bool!
+            title.text = with["name"].string
+            toggle.isOn = value.boolValue
         }
     }
     
