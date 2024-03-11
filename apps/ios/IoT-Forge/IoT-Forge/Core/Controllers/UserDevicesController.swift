@@ -15,7 +15,7 @@ class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewD
     let noDevicesLabel = UILabel()
     let callToActionButton = UIButton(type: .system)
     
-    var savedDevices = JSON(stringLiteral: "[]")
+    var savedDevices: [NewSystemContainer] = []
     
     let dataHelper = DataHelper.shared
     
@@ -106,7 +106,7 @@ class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         var config = cell.defaultContentConfiguration()
         
-        config.text = savedDevices[indexPath.row]["nickname"].string
+        config.text = savedDevices[indexPath.row].settings["#name"].string
         cell.contentConfiguration = config
     
         return cell
@@ -115,8 +115,8 @@ class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if let nextView = dataHelper.modelToControllerInstance(model: savedDevices[indexPath.row]["model"].string!) {
-            nextView.profile = savedDevices[indexPath.row]
+        if let nextView = dataHelper.modelToControllerInstance(model: savedDevices[indexPath.row].profile["model"].string!) {
+            nextView.system = savedDevices[indexPath.row]
             navigationController?.pushViewController(nextView, animated: true)
         }
     }

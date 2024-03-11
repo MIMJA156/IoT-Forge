@@ -15,9 +15,8 @@ class AdditionalConfigurationController: UIViewController, UITableViewDelegate, 
     }()
     let actionButton = UIButton(type: .system)
     
-    var selectedDeviceProfile: JSON!
-    var unSetSettings = JSON(parseJSON: "[]")
-    var unSetSettingsIndexMap: [Int] = []
+    var newSystem: NewSystemContainer!
+    var settingsToSet: [JSON] = []
     
     let ble = BLEManager.shared
     let dataHelper = DataHelper.shared
@@ -35,19 +34,8 @@ class AdditionalConfigurationController: UIViewController, UITableViewDelegate, 
         tableView.delegate = self
         tableView.dataSource = self
         
-        var currentCount = 0
-        for (_, item) in selectedDeviceProfile["settings"]["structure"].makeIterator() {
-            let isNil = testForNilSetting(item: item)
-            
-            if isNil {
-                unSetSettings.arrayObject!.append(item)
-                unSetSettingsIndexMap.append(currentCount)
-            }
-            
-            currentCount += 1
-        }
-        
-        setAllBooleansToFalse()
+        let publicItems = newSystem.profile["settings"]["structure"]["publics"].arrayValue
+        settingsToSet = pullAllUnsetRequiredSettings(layer: publicItems)
     }
     
     func buildUI() {
@@ -110,38 +98,40 @@ class AdditionalConfigurationController: UIViewController, UITableViewDelegate, 
         ])
     }
     
-    func updateSettingsItem(index: Int, setting: JSON) {
-        unSetSettings[index] = setting
-        updateDoneButton()
-    }
-    
-    func setAllBooleansToFalse() {
-        for (index, setting) in unSetSettings {
-            if setting["type"] == "boolean" {
-                var new = setting
-                new["value"] = false
-                updateSettingsItem(index: Int(index)!, setting: new)
+    func pullAllUnsetRequiredSettings(layer: [JSON]) -> [JSON] {
+        var returnItems: [JSON] = []
+        
+        for item in layer {
+            if item["type"].string == "section" {
+                returnItems.append(contentsOf: pullAllUnsetRequiredSettings(layer: item["structure"].arrayValue))
+            } else {
+                if item["required"].boolValue && !item["default"].exists() {
+                    returnItems.append(item)
+                }
             }
         }
+        
+        return returnItems
     }
     
-    func testForNilSetting(item: JSON) -> Bool {
-        item["value"].isEmpty
+    func updateSettingsItem(id: String, new: JSON) {
+        newSystem.settings[id] = new
+        updateDoneButton()
     }
     
     func updateDoneButton() {
         var isGood = true
         
-        for (_, setting) in unSetSettings {
-            if setting["value"].null != nil { isGood = false }
+        for setting in settingsToSet {
+            let val = newSystem.settings[setting["id"].stringValue]
+            if !val.exists() { isGood = false; break }
         }
         
         if isGood { actionButton.isEnabled = true }
     }
     
     @objc func completionButtonClicked() {
-        mergeToFinal()
-        let _ = dataHelper.addSavedDevices(new: selectedDeviceProfile)
+        let _ = dataHelper.addSavedDevices(new: newSystem)
         self.ble.disconnect()
         self.navigationController?.popToViewController(
             (self.navigationController?.viewControllers[0])!,
@@ -164,15 +154,8 @@ class AdditionalConfigurationController: UIViewController, UITableViewDelegate, 
         present(alert, animated: true)
     }
     
-    func mergeToFinal() {
-        for (index, unSetSetting) in unSetSettings {
-            let index = unSetSettingsIndexMap[Int(index)!]
-            selectedDeviceProfile["settings"]["structure"][index] = unSetSetting
-        }
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return unSetSettings.count
+        return settingsToSet.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -180,22 +163,24 @@ class AdditionalConfigurationController: UIViewController, UITableViewDelegate, 
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return unSetSettings[section]["info"].string
+        return settingsToSet[section]["info"].string
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let unkownSettingsItem = unSetSettings[indexPath.section]
+        let unkownSettingsItem = settingsToSet[indexPath.section]
         
         if unkownSettingsItem["type"] == "string" {
             return buildDefualtCellWithTittleAndContent(
                 title: unkownSettingsItem["name"].string!,
-                content: unkownSettingsItem["value"].string,
+                content: newSystem.settings[unkownSettingsItem["id"].stringValue].string,
                 indexPath: indexPath
             )
         }
         
         if unkownSettingsItem["type"] == "integer" {
-            let content = unkownSettingsItem["value"].int32 != nil ? "\(unkownSettingsItem["value"].int32!)" : nil
+            let value = newSystem.settings[unkownSettingsItem["id"].stringValue].int32
+            let content = value != nil ? "\(value!)" : nil
+            
             return buildDefualtCellWithTittleAndContent(
                 title: unkownSettingsItem["name"].string!,
                 content: content,
@@ -208,9 +193,8 @@ class AdditionalConfigurationController: UIViewController, UITableViewDelegate, 
             cell.configure(with: unkownSettingsItem)
             cell.didToggle = { (isOn) -> () in
                 let index = indexPath.section
-                var selected = self.unSetSettings[index]
-                selected["value"].bool = isOn
-                self.updateSettingsItem(index: index, setting: selected)
+                let id = self.settingsToSet[index]["id"].stringValue
+                self.updateSettingsItem(id: id, new: JSON(booleanLiteral: isOn))
             }
             return cell
         }
@@ -240,12 +224,13 @@ class AdditionalConfigurationController: UIViewController, UITableViewDelegate, 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        switch unSetSettings[indexPath.section]["type"].string {
+        switch settingsToSet[indexPath.section]["type"].string {
         case "string", "integer":
             let nextView = AdditionalConfigurationEditingController()
+            let settingToSet = settingsToSet[indexPath.section]
             
-            nextView.selectedIndex = indexPath.section
-            nextView.selectedSetting = unSetSettings[indexPath.section]
+            nextView.selectedSetting = settingToSet
+            nextView.currentValue = newSystem.settings[settingToSet["id"].stringValue]
             nextView.updateFunction = self.updateSettingsItem
             
             navigationController?.pushViewController(nextView, animated: true)

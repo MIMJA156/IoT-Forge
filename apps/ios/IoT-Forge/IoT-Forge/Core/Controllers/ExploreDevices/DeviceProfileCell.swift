@@ -48,8 +48,7 @@ class DeviceConfigurationProfileCell: UITableViewCell {
     }
 
     func configure(with profile: JSON) {
-        print(profile)
-        titleLabel.text = profile["title"].string
+        titleLabel.text = profile["name"].string
         modelLabel.text = "Model: \(profile["model"].string!)"
     }
 }

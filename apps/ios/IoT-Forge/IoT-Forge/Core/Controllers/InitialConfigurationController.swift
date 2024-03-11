@@ -15,9 +15,9 @@ class InitialConfigurationController: UIViewController, BLEManagerDelegate, UITe
     let nameTextField = UITextField()
     let actionButton = UIButton(type: .system)
     
-    var selectedDeviceProfile: JSON!
-    var token: UInt32!
+    var newSystem: NewSystemContainer!
     var nickname: String!
+    var requiresAdditionalConfig = false
     
     let ble = BLEManager.shared
     let dataHelper = DataHelper.shared
@@ -32,7 +32,10 @@ class InitialConfigurationController: UIViewController, BLEManagerDelegate, UITe
         buildUI()
         setupSubviews()
         
-        if selectedDeviceProfile["settings"]["additionalConfig"].bool! {
+        let publicItems = newSystem.profile["settings"]["structure"]["publics"].arrayValue
+        requiresAdditionalConfig = doesRequireAdditionalConfig(layer: publicItems)
+        
+        if requiresAdditionalConfig {
             actionButton.setTitle("Next", for: .normal)
         }
     }
@@ -111,12 +114,25 @@ class InitialConfigurationController: UIViewController, BLEManagerDelegate, UITe
         ])
     }
     
+    func doesRequireAdditionalConfig(layer: [JSON]) -> Bool {
+        for item in layer {
+            if item["type"].string == "section" {
+                if doesRequireAdditionalConfig(layer: item["structure"].arrayValue) { return true }
+            }
+            else {
+                if item["required"].boolValue && !item["default"].exists() { return true }
+            }
+        }
+        
+        return false
+    }
+    
     func getRandomAdjectivePhrase(words: Int) -> String {
         let adjectivesList = FileHelper.getEnglishAdjectivesList()
         
         var sentence = ""
         for _ in 1...words {
-            sentence += adjectivesList[Int.random(in: 1...adjectivesList.count)] + "-"
+            sentence += adjectivesList[Int.random(in: 1...(adjectivesList.count - 1))] + "-"
         }
         sentence.removeLast()
         
@@ -143,24 +159,39 @@ class InitialConfigurationController: UIViewController, BLEManagerDelegate, UITe
         present(alert, animated: true)
     }
     
+    func pullDefaultSettings(layer: [JSON]) {
+        for item in layer {
+            if item["type"].string == "section" { pullDefaultSettings(layer: item["structure"].arrayValue) }
+            else {
+                if item["default"].exists() {
+                    newSystem.settings[item["id"].stringValue] = item["default"]
+                }
+            }
+        }
+    }
+    
     @objc func completionButtonClicked() {
         var text: String!
         let name = getValidateName()
         
         if name == nil { text = nameTextField.placeholder }
         else { text = name }
-        
         nickname = text
         
-        selectedDeviceProfile["nickname"].string = nickname
-        selectedDeviceProfile["bluetooth"]["token"].uInt32 = token
+        newSystem.settings["#name"].string = nickname
         
-        if selectedDeviceProfile["settings"]["additionalConfig"].bool! {
+        let publicItems = newSystem.profile["settings"]["structure"]["publics"].arrayValue
+        pullDefaultSettings(layer: publicItems)
+        
+        let privateItems = newSystem.profile["settings"]["structure"]["privates"].arrayValue
+        pullDefaultSettings(layer: privateItems)
+        
+        if requiresAdditionalConfig {
             let nextController = AdditionalConfigurationController()
-            nextController.selectedDeviceProfile = selectedDeviceProfile
+            nextController.newSystem = newSystem
             navigationController?.pushViewController(nextController, animated: true)
         } else {
-            let _ = dataHelper.addSavedDevices(new: selectedDeviceProfile)
+            let _ = dataHelper.addSavedDevices(new: newSystem)
             self.ble.disconnect()
             self.navigationController?.popToViewController(
                 (self.navigationController?.viewControllers[0])!,

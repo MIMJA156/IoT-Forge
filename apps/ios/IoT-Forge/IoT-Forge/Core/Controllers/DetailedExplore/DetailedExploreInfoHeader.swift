@@ -94,7 +94,7 @@ class DetailedExploreInfoHeader: UITableViewHeaderFooterView {
         
         createButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         
-        titleLabel.text = profile["title"].string
+        titleLabel.text = profile["name"].string
         modelLabel.text = "Model: \(profile["model"].string!)"
         versionLabel.text = "Version: \(profile["version"].string!)"
         

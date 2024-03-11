@@ -15,7 +15,7 @@ class PairingController: UIViewController, BLEManagerDelegate {
     let indicator = BluetootSearchingIndicator()
     
     var token: UInt32!
-    var selectedDeviceProfile: JSON!
+    var newSystem: NewSystemContainer!
     
     let pairingAlert: UIAlertController = {
         let alert = UIAlertController(
@@ -64,9 +64,9 @@ class PairingController: UIViewController, BLEManagerDelegate {
         
         instructionsLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        if selectedDeviceProfile["bluetooth"]["instructions"].string != nil {
+        if newSystem.profile["bluetooth"]["instructions"].string != nil {
             instructionsLabel.font = .systemFont(ofSize: 16)
-            instructionsLabel.text = selectedDeviceProfile["bluetooth"]["instructions"].string
+            instructionsLabel.text = newSystem.profile["bluetooth"]["instructions"].string
         } else {
             instructionsLabel.font = .italicSystemFont(ofSize: 16)
             instructionsLabel.text = "no instructions"
@@ -120,7 +120,7 @@ class PairingController: UIViewController, BLEManagerDelegate {
             let isPairing = data[9] == 2 ? true : false
             let model = String(data: data[0...8], encoding: .ascii)
             
-            if (isPairing && model == selectedDeviceProfile["model"].string) {
+            if (isPairing && model == newSystem.profile["model"].string) {
                 ble.connect(peripheral: peripheral)
             }
         }
@@ -176,8 +176,8 @@ class PairingController: UIViewController, BLEManagerDelegate {
                     pairingAlert.dismiss(animated: false) {
                         if self.token != 0 {
                             let screen = InitialConfigurationController()
-                            screen.selectedDeviceProfile = self.selectedDeviceProfile
-                            screen.token = self.token
+                            self.newSystem.settings["#token"].uInt32 = self.token
+                            screen.newSystem = self.newSystem
                             
                             self.navigationController?.pushViewController(
                                 screen,

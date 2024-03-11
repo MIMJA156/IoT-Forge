@@ -9,70 +9,19 @@ import UIKit
 import SwiftyJSON
 
 class LocalSystem: UIViewController {
-    var profile: JSON!
+    var system: NewSystemContainer!
 }
 
-enum DeviceConfigurationProfileSettingsTypes {
-    case string
-    case integer
-    case boolean
+class NewSystemContainer {
+    let profile: JSON
+    var settings: JSON = JSON(parseJSON: "{}")
+    
+    init(profile: JSON) {
+        self.profile = profile
+    }
 }
 
 struct TableViewSection<T> {
     let title: String
     var data: [T]
-}
-
-struct DeviceConfigurationProfile {
-    var nickname: String?
-    
-    let title: String
-    let model: String
-    let version: String
-    let description: String?
-    
-    var bluetooth: DeviceConfigurationProfileBluetooth
-    var settings: DeviceConfigurationProfileSettings
-}
-
-struct DeviceConfigurationProfileBluetooth {
-    var token: UInt32?
-    
-    let pairing: String
-    let instructions: String?
-}
-
-struct DeviceConfigurationProfileSettings {
-    let additionalConfig: Bool
-    var structure: [DeviceConfigurationProfileSettingsGeneric]
-}
-
-protocol DeviceConfigurationProfileSettingsGeneric {
-    var type: DeviceConfigurationProfileSettingsTypes { get }
-    var name: String { get }
-    var info: String? { get }
-}
-
-struct DeviceConfigurationProfileSettingsString: DeviceConfigurationProfileSettingsGeneric {
-    var type: DeviceConfigurationProfileSettingsTypes = .string
-    var name: String
-    var info: String?
-    
-    var value: String?
-}
-
-struct DeviceConfigurationProfileSettingsInteger: DeviceConfigurationProfileSettingsGeneric {
-    var type: DeviceConfigurationProfileSettingsTypes = .integer
-    var name: String
-    var info: String?
-    
-    var value: Int32?
-}
-
-struct DeviceConfigurationProfileSettingsBoolean: DeviceConfigurationProfileSettingsGeneric {
-    var type: DeviceConfigurationProfileSettingsTypes = .boolean
-    var name: String
-    var info: String?
-    
-    var value: Bool?
 }

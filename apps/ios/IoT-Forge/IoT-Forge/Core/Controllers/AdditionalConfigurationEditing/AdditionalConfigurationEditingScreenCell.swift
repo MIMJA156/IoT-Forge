@@ -52,15 +52,15 @@ class AdditionalConfigurationEditingScreenCell: UITableViewCell {
         return textFeild
     }
     
-    func configure(with: JSON) {
+    func configure(with: JSON, value: JSON) {
         switch with["type"].string {
         case "string":
-            let value = with["value"].string
+            let value = value.string
             if value != nil { textFeild.text = value }
             break
         
         case "integer":
-            let value = with["value"].string
+            let value = value.int32
             if value != nil { textFeild.text = "\(value!)" }
             
             textFeild.keyboardType = .numbersAndPunctuation

@@ -62,7 +62,7 @@ class DetailedExploreController: UIViewController, UITableViewDataSource, UITabl
     
     func doSomeStuffWhenButtonGoYes(sender: UIButton) {
         let nextView = PairingController()
-        nextView.selectedDeviceProfile = selectedDeviceConfigurationProfile
+        nextView.newSystem = NewSystemContainer(profile: selectedDeviceConfigurationProfile)
         navigationController?.pushViewController(nextView, animated: true)
     }
     

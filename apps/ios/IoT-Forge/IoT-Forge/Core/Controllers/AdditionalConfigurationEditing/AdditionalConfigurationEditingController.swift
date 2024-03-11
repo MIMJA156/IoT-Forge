@@ -14,8 +14,8 @@ class AdditionalConfigurationEditingController: UIViewController, UITableViewDat
     }()
     
     var selectedSetting: JSON!
-    var selectedIndex: Int!
-    var updateFunction: ((Int, JSON) -> ())!
+    var currentValue: JSON!
+    var updateFunction: ((String, JSON) -> ())!
     
     let additionalConfigurationEditingScreenCell = AdditionalConfigurationEditingScreenCell()
     
@@ -30,7 +30,7 @@ class AdditionalConfigurationEditingController: UIViewController, UITableViewDat
         tableView.dataSource = self
         
         additionalConfigurationEditingScreenCell.getField().delegate = self
-        additionalConfigurationEditingScreenCell.configure(with: selectedSetting)
+        additionalConfigurationEditingScreenCell.configure(with: selectedSetting, value: currentValue)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -92,20 +92,15 @@ class AdditionalConfigurationEditingController: UIViewController, UITableViewDat
         
         if selectedSetting["type"] == "string" {
             if isValidTextString(text: cleanedText) {
-                var stringSetting = selectedSetting
-                stringSetting!["value"].string = cleanedText
-                
-                updateFunction(selectedIndex, stringSetting!)
+                updateFunction(selectedSetting["id"].stringValue, JSON(stringLiteral: cleanedText!))
                 navigationController?.popViewController(animated: true)
             } else {
                 print("invalid / string")
             }
         } else if selectedSetting["type"] == "integer" {
             if isValidTextInteger(text: cleanedText) {
-                var integerSetting = selectedSetting
-                integerSetting!["value"].int32 = Int32(cleanedText!)
-                
-                updateFunction(selectedIndex, integerSetting!)
+                let newInt = Int(cleanedText!)!
+                updateFunction(selectedSetting["id"].stringValue, JSON(integerLiteral: newInt))
                 navigationController?.popViewController(animated: true)
             } else {
                 print("invalid / integer")

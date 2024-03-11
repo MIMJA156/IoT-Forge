@@ -12,7 +12,7 @@ import SwiftyJSON
 class DataHelper {
     static let shared = DataHelper()
     
-    private var mem_devices = JSON(parseJSON: "[]")
+    private var mem_devices: [NewSystemContainer] = []
     private var modelToControllerMap: [String: LocalSystem.Type] = [
         "XYZ-1001A": MyFirstTestDevice.self
     ]
@@ -21,12 +21,12 @@ class DataHelper {
     static let authenticationBLEUUID = CBUUID(string: "E50D58B4-11F2-49C5-8D2A-D71F5A6CDE3F")
     static let eventbusBLEUUID = CBUUID(string: "389E5355-6224-4134-9257-062BEB5B67B3")
     
-    func getSavedDevices() -> JSON {
+    func getSavedDevices() -> [NewSystemContainer] {
         return mem_devices
     }
     
-    func addSavedDevices(new: JSON) -> JSON {
-        mem_devices.arrayObject?.append(new)
+    func addSavedDevices(new: NewSystemContainer) -> [NewSystemContainer] {
+        mem_devices.append(new)
         return mem_devices
     }
     
