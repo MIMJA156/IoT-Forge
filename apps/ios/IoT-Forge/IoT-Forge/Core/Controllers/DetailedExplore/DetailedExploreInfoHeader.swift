@@ -19,12 +19,15 @@ class DetailedExploreInfoHeader: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        buildUI()
-        setupSubviews()
+        commonInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    private func commonInit() {
         buildUI()
         setupSubviews()
     }
@@ -53,7 +56,7 @@ class DetailedExploreInfoHeader: UITableViewHeaderFooterView {
         createButton.backgroundColor = .systemGray5
         
         createButton.layer.cornerRadius = 5
-        createButton.layer.borderColor = .some(UIColor.black.cgColor)
+        createButton.layer.borderColor = .some(currentUserColorStyleInverse.cgColor)
         createButton.layer.borderWidth = 1
     }
 
@@ -104,6 +107,10 @@ class DetailedExploreInfoHeader: UITableViewHeaderFooterView {
             descriptionLabel.font = .italicSystemFont(ofSize: 16)
             descriptionLabel.text = "no description"
         }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        createButton.layer.borderColor = .some(currentUserColorStyleInverse.cgColor)
     }
 
     @objc func buttonPressed(sender: UIButton) {

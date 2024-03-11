@@ -15,7 +15,7 @@ class PairingController: UIViewController, BLEManagerDelegate {
     let indicator = BluetootSearchingIndicator()
     
     var token: UInt32!
-    var newSystem: NewSystemContainer!
+    var newSystem: SystemContainer!
     
     let pairingAlert: UIAlertController = {
         let alert = UIAlertController(
@@ -253,11 +253,14 @@ class BluetootSearchingIndicator: UIView {
     private func buildUI() {
         pulsingCircleLayer.fillColor = UIColor.systemBlue.cgColor
         pulsingCircleLayer.opacity = 0.25
+        pulsingCircleLayer.zPosition = 5
         
         staticCircleLayer.fillColor = UIColor.systemBlue.cgColor
         staticCircleLayer.opacity = 0.5
+        staticCircleLayer.zPosition = 10
         
         bluetoothImageView.translatesAutoresizingMaskIntoConstraints = false
+        bluetoothImageView.layer.zPosition = 15
     }
     
     private func setupSubviews() {

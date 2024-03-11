@@ -58,6 +58,20 @@ class AdditionalConfigurationEditingController: UIViewController, UITableViewDat
         ])
     }
     
+    func displayInputError(error: String) {
+        let alert = UIAlertController(
+            title: error,
+            message: nil,
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(
+            UIAlertAction(title: "Ok", style: .default)
+        )
+        
+        present(alert, animated: true)
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return screen.count
     }
@@ -96,6 +110,7 @@ class AdditionalConfigurationEditingController: UIViewController, UITableViewDat
                 navigationController?.popViewController(animated: true)
             } else {
                 print("invalid / string")
+                displayInputError(error: "invalid string")
             }
         } else if selectedSetting["type"] == "integer" {
             if isValidTextInteger(text: cleanedText) {
@@ -104,6 +119,7 @@ class AdditionalConfigurationEditingController: UIViewController, UITableViewDat
                 navigationController?.popViewController(animated: true)
             } else {
                 print("invalid / integer")
+                displayInputError(error: "invalid integer")
             }
         }
         

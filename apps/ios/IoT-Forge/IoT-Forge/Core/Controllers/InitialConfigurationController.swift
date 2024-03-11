@@ -15,7 +15,7 @@ class InitialConfigurationController: UIViewController, BLEManagerDelegate, UITe
     let nameTextField = UITextField()
     let actionButton = UIButton(type: .system)
     
-    var newSystem: NewSystemContainer!
+    var newSystem: SystemContainer!
     var nickname: String!
     var requiresAdditionalConfig = false
     

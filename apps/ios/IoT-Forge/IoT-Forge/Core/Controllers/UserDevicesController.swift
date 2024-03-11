@@ -15,7 +15,7 @@ class UserDevicesController: UIViewController, UITableViewDelegate, UITableViewD
     let noDevicesLabel = UILabel()
     let callToActionButton = UIButton(type: .system)
     
-    var savedDevices: [NewSystemContainer] = []
+    var savedDevices: [SystemContainer] = []
     
     let dataHelper = DataHelper.shared
     

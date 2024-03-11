@@ -9,10 +9,10 @@ import UIKit
 import SwiftyJSON
 
 class LocalSystem: UIViewController {
-    var system: NewSystemContainer!
+    var system: SystemContainer!
 }
 
-class NewSystemContainer {
+class SystemContainer {
     let profile: JSON
     var settings: JSON = JSON(parseJSON: "{}")
     
@@ -24,4 +24,8 @@ class NewSystemContainer {
 struct TableViewSection<T> {
     let title: String
     var data: [T]
+}
+
+let currentUserColorStyleInverse = UIColor { traitCollection in
+    return traitCollection.userInterfaceStyle == .dark ? UIColor.white : UIColor.black
 }

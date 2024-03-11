@@ -15,7 +15,7 @@ class AdditionalConfigurationController: UIViewController, UITableViewDelegate, 
     }()
     let actionButton = UIButton(type: .system)
     
-    var newSystem: NewSystemContainer!
+    var newSystem: SystemContainer!
     var settingsToSet: [JSON] = []
     
     let ble = BLEManager.shared
@@ -163,7 +163,7 @@ class AdditionalConfigurationController: UIViewController, UITableViewDelegate, 
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return settingsToSet[section]["info"].string
+        return settingsToSet[section]["description"].string
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
