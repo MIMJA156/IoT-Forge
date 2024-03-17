@@ -2,7 +2,7 @@
 //  AdditionalConfigurationScreenBooleanCell.swift
 //  IoT-Forge
 //
-//  Created by Mizia, Miles - Student on 2/24/24.
+//  Created on 2/24/24.
 //
 
 import UIKit

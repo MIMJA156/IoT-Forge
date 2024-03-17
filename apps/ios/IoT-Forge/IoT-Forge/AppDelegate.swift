@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  IoT-Forge
 //
-//  Created by Mizia, Miles - Student on 2/17/24.
+//  Created on 2/17/24.
 //
 
 import UIKit

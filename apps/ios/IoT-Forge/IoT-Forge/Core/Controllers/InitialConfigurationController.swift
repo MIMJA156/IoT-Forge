@@ -2,7 +2,7 @@
 //  InitailConfigurationScreen.swift
 //  IoT-Forge
 //
-//  Created by Mizia, Miles - Student on 2/19/24.
+//  Created on 2/19/24.
 //
 
 import UIKit

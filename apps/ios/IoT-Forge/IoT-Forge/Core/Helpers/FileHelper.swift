@@ -2,7 +2,7 @@
 //  FileHelper.swift
 //  IoT-Forge
 //
-//  Created by Mizia, Miles - Student on 3/4/24.
+//  Created on 3/4/24.
 //
 
 import Foundation

@@ -2,7 +2,7 @@
 //  MyFirstTestDevice.swift
 //  IoT-Forge
 //
-//  Created by Mizia, Miles - Student on 2/26/24.
+//  Created on 2/26/24.
 //
 
 import UIKit
@@ -154,10 +154,10 @@ class MyFirstTestDevice: LocalSystem, BLEManagerDelegate {
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        if let charecteristics = service.characteristics {
-            for charecteristic in charecteristics {
-                if charecteristic.uuid == DataHelper.authenticationBLEUUID {
-                    peripheral.setNotifyValue(true, for: charecteristic)
+        if let characteristics = service.characteristics {
+            for characteristic in characteristics {
+                if characteristic.uuid == DataHelper.authenticationBLEUUID {
+                    peripheral.setNotifyValue(true, for: characteristic)
                 }
             }
             
