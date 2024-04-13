@@ -27,18 +27,21 @@
                         "id": "setting-two",
                         "type": "string",
                         "name": "Setting Two",
+                        "description": "Yet another debug setting, happing deugging! (string)",
                         "required": true,
                     },
                     {
                         "id": "setting-three",
                         "type": "boolean",
                         "name": "Setting Three",
+                        "description": "Yet another debug setting, happing deugging! (boolean)",
                         "required": true,
                     },
                     {
                         "id": "setting-four",
                         "type": "integer",
                         "name": "Setting Four",
+                        "description": "Yet another debug setting, happing deugging! (number)",
                         "required": true,
                     }
                 ],
